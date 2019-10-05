@@ -294,8 +294,8 @@ function Set-MyPrompt {
             $GitPromptSettings.AfterStatus.Text = "]"
         } else {
             $GitPromptSettings.BeforeStatus.Text = "{0} " -f [PoshCode.Pansies.Entities]::ExtendedCharacters.Branch
-            $GitPromptSettings.DelimStatus.Text = " {0} " -f [PoshCode.Pansies.Entities]::ExtendedCharacters.Separator
-            $GitPromptSettings.AfterStatus.Text = ""
+            $GitPromptSettings.DelimStatus.Text = " | " -f [PoshCode.Pansies.Entities]::ExtendedCharacters.Separator
+            $GitPromptSettings.AfterStatus.Text = " "
         }
     }
 
