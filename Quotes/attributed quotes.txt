@@ -7,7 +7,7 @@ A door is what a dog is perpetually on the wrong side of. -- Ogden Nash
 A fanatic is one who can't change his mind and won't change the subject. -- Winston Churchill
 A fool's brain digests philosophy into folly, science into superstition, and art into pedantry.  Hence University education. -- G. B. Shaw
 A free society is one where it is safe to be unpopular. -- Adlai Stevenson
-A Galileo could no more be elected president of the United States than he could be elected Pope of Rome.  Both high posts are reserved for men favored by God with an extraordinary genius for swathing the bitter facts of life in bandages of self -- illusion. -- H. L. Mencken
+A Galileo could no more be elected president of the United States than he could be elected Pope of Rome.  Both high posts are reserved for men favored by God with an extraordinary genius for swathing the bitter facts of life in bandages of self-illusion. -- H. L. Mencken
 A general leading the State Department resembles a dragon commanding ducks. -- New York Times, Jan. 20, 1981
 A good question is never answered.  It is not a bolt to be tightened into place but a seed to be planted and to bear more seed toward the hope of greening the landscape of idea. -- John Ciardi
 A great many people mistake opinions for thoughts. -- Herbert V. Prochnow
@@ -25,7 +25,7 @@ About the time we think we can make ends meet, somebody moves the ends. -- Herbe
 According to my best recollection, I don't remember. -- Vincent "Jimmy Blue Eyes" Alo
 According to the Rand McNally Places-Rated Almanac, the best place to live in America is the city of Pittsburgh.  The city of New York came in twenty-fifth.  Here in New York we really don't care too much. Because we know that we could beat up their city anytime. -- David Letterman
 Acquaintance, n.   A person whom we know well enough to borrow from, but not well enough to lend to. -- Ambrose Bierce, "The Devil's Dictionary"
-Actor: "I'm a smash hit.  Why, yesterday during the last act, I had everyone glued in their seats!"  Oliver Herford: "Wonderful!  Wonderful!  Clever of you to think of it!"
+Actor: "I'm a smash hit.  Why, yesterday during the last act, I had everyone glued in their seats!"  Oliver Herford: "Wonderful!  Wonderful!  Clever of you to think of it!" -- Oliver Herford
 Advertising is a valuable economic factor because it is the cheapest way of selling goods, particularly if the goods are worthless. -- Sinclair Lewis
 After a few boring years, socially meaningful rock 'n' roll died out. It was replaced by disco, which offers no guidance to any form of life more advanced than the lichen family. -- Dave Barry, "Kids Today: They Don't Know Dum Diddly Do"
 After all, what is your hosts' purpose in having a party?  Surely not for you to enjoy yourself; if that were their sole purpose, they'd have simply sent champagne and women over to your place by taxi. -- P. J. O'Rourke
@@ -37,7 +37,7 @@ All the world's a stage and most of us are desperately unrehearsed. -- Sean O'Ca
 All wars are civil wars, because all men are brothers ... Each one owes infinitely more to the human race than to the particular country in which he was born. -- Francois Fenelon
 Although golf was originally restricted to wealthy, overweight Protestants, today it's open to anybody who owns hideous clothing. -- Dave Barry
 Always bear in mind that your own resolution to success is more important than any other one thing. -- Abraham Lincoln
-Always do sober what you said you'd do drunk. That will teach you to keep your mouth shut. - Ernest Hemingway
+Always do sober what you said you'd do drunk. That will teach you to keep your mouth shut. -- Ernest Hemingway
 Ambiguity Error: when something is definitely wrong, or maybe not -- Computer Hater's Handbook (glossary)
 America may be unique in being a country which has leapt from barbarism to decadence without touching civilization. -- John O'Hara
 An age is called Dark not because the light fails to shine, but because people refuse to see it. -- James Michener, "Space"
@@ -139,7 +139,7 @@ Life is like a ferrari. It goes too fast. But that's ok, because you can't affor
 Life is what happens while your making other plans. --  John Lennon
 Look, we play the Star Spangled Banner before every game.  You want us to pay income taxes, too? -- Bill Veeck, Chicago White Sox
 Love: a temporary insanity, curable by marriage. -- Ambrose Bierce
-Make it possible for programmers to write in English and you will find the programmers cannot write in English.  - Murphy's Law's of Programming # 124:  
+Make it possible for programmers to write in English and you will find the programmers cannot write in English.  - Murphy's Law's of Programming # 124:
 Man is the best computer we can put aboard a spacecraft ... and the only one that can be mass produced with unskilled labor. -- Wernher von Braun
 Man is the only animal that can remain on friendly terms with the victims he intends to eat until he eats them. -- Samuel Butler
 Man will occasionally stumble over the truth, but most of the time he will pick himself up and continue on. -- Winston Churchill
@@ -168,7 +168,7 @@ Security is when everything is settled.  When nothing can happen to you.  Securi
 Sharks are as tough as those football fans who take their shirts off during games in Chicago in January, only more intelligent. -- Dave Barry
 Sincerity is everything. If you can fake that, you've got it made. --  George Burns
 Sometimes your joy is the source of your smile, but sometimes your smile can be the source of your joy. -- Thich Nhat Hanh
-Support by United States rulers is rather in the nature of the support that the rope gives to a hanged man. -- Nikita Khrushchev 
+Support by United States rulers is rather in the nature of the support that the rope gives to a hanged man. -- Nikita Khrushchev
 The algorithm to do that is extremely nasty.  You might want to mug someone with it. -- M. Devine, Computer Science 340
 The brain is a wonderful organ; it starts working the moment you get up in the morning and does not stop until you get to the office. --  Robert Frost
 The cost of living is going up and the chance of living is going down. --  Flip Wilson
@@ -204,7 +204,7 @@ Under the most rigorously controlled conditions of pressure, temperature, humidi
 We aim above the mark to hit the mark. -- Ralph Waldo Emerson
 We are always paid for our suspicion by finding what we suspect. -- Henry David Thoreau
 We know what we are, but know not what we may be. -- Shakespeare
-What contemptible scoundrel has stolen the cork to my lunch? - W.C. Fields
+What contemptible scoundrel has stolen the cork to my lunch? -- W.C. Fields
 What George Washington did for us was to throw out the British, so that we wouldn't have a fat, insensitive government running our country. Nice try anyway, George. -- D.J. on KSFO/KYA
 When I get real bored, I like to drive downtown and get a great parking spot, then sit in my car and count how many people ask me if I'm leaving. -- Steven Wright
 When I was a kid I said to my father one afternoon, "Daddy, will you take me to the zoo?" He answered, "If the zoo wants you let them come and get you." -- Jerry Lewis
@@ -221,9 +221,9 @@ An American has no sense of privacy. He does not know what it means. There is no
 As Americans, we want peace -- we work and sacrifice for peace. But there can be no peace if our security depends on the will and whims of a ruthless and aggressive dictator.  -- George W. Bush (1946 - ), October 7, 2002
 Big Brother in the form of an increasingly powerful government and in an increasingly powerful private sector will pile the records high with reasons why privacy should give way to national security, to law and order, to efficiency of operation, to scientific advancement and the like. -- William O. Douglas
 Every ambitious would-be empire, clarions it abroad that she is conquering the world to bring it peace, security and freedom, and it is sacrificing her sons only for the most noble and humanitarian purposes. That is a lie; and it is an ancient lie, yet generations still rise and believe it. -- Taylor Caldwell, Testimony of Two Men, 1968
-Security is mostly a superstition. It does not exist in nature, nor do the children of men as a whole experience it. Avoiding danger is not safer in the long run than outright exposure. Life is either a daring adventure, or nothing. -- Helen Keller (1880 - 1968) "Let Us Have Faith" 1940 
+Security is mostly a superstition. It does not exist in nature, nor do the children of men as a whole experience it. Avoiding danger is not safer in the long run than outright exposure. Life is either a daring adventure, or nothing. -- Helen Keller (1880 - 1968) "Let Us Have Faith" 1940
 They who would give up an essential liberty for temporary security, deserve neither liberty or security. -- Benjamin Franklin (1706 - 1790)
 Too many people are thinking of security instead of opportunity. They seem more afraid of life than death. -- James F. Byrnes (1879 - 1972)
 True individual freedom cannot exist without economic security and independence. People who are hungry and out of a job are the stuff of which dictatorships are made. -- Franklin D. Roosevelt (1882 - 1945)
 You and I are told we must choose between a left or right, but I suggest there is no such thing as a left or right. There is only an up or down. Up to man's age-old dream-the maximum of individual freedom consistent with order or down to the ant heap of totalitarianism. Regardless of their sincerity, their humanitarian motives, those who would sacrifice freedom for security have embarked on this downward path. -- Ronald Reagan
-Whether you think that you can, or that you can't, you are usually right. -- Henry Ford 
+Whether you think that you can, or that you can't, you are usually right. -- Henry Ford

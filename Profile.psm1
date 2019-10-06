@@ -47,7 +47,8 @@ Trace-Message "Random Quotes Loaded"
 
 ## Get a random quote, and print it in yellow :D
 if( Test-Path "${QuoteDir}\attributed quotes.txt" ) {
-    Get-Quote | Write-Host -Foreground "xt214"
+    # Get-Quote | Write-Host -Foreground "xt214"
+    Format-Quote -Text (Get-Quote)
 }
 
 #####
