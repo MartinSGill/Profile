@@ -26,7 +26,7 @@ This is Joel "Jaykul" Bennett's coloring format file for PowerShell 5.1
                                     <Text>Directory </Text>
                                     <ExpressionBinding>
                                         <ScriptBlock>
-                      $_.PSParentPath.Replace("Microsoft.PowerShell.Core\FileSystem::","")
+                    $_.PSParentPath.Replace("Microsoft.PowerShell.Core\FileSystem::","")
                                         </ScriptBlock>
                                     </ExpressionBinding>
                                     <NewLine/>
@@ -67,25 +67,25 @@ This is Joel "Jaykul" Bennett's coloring format file for PowerShell 5.1
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                  $ts = $_.EndExecutionTime - $_.StartExecutionTime
-                  if($ts.Minutes)
-                  {
+                $ts = $_.EndExecutionTime - $_.StartExecutionTime
+                if($ts.Minutes)
+                {
                     if($ts.Hours)
                     {
-                      if($ts.Days)
-                      {
-                        return "{0:##}d {1:00}h {2:00}m" -f $ts.Days, $ts.Hours, $ts.Minutes
-                      }
-                      return "{0:##}h {1:00}m {2:00}s" -f $ts.Hours, $ts.Minutes, $ts.Seconds
+                        if($ts.Days)
+                        {
+                            return "{0:##}d {1:00}h {2:00}m" -f $ts.Days, $ts.Hours, $ts.Minutes
+                        }
+                        return "{0:##}h {1:00}m {2:00}s" -f $ts.Hours, $ts.Minutes, $ts.Seconds
                     }
-                    return "{0:##}m {1:n3}s" -f $ts.Minutes, ($ts.TotalSeconds - ($ts.Minutes * 60))
-                  }
-                  return "{0:n5}s" -f $ts.TotalSeconds
+                  return "{0:##}m {1:n3}s" -f $ts.Minutes, ($ts.TotalSeconds - ($ts.Minutes * 60))
+                }
+                return "{0:n5}s" -f $ts.TotalSeconds
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                  $_.CommandLine.TrimStart() -replace "[\r\n]+", "$([char]0x2026) "
+                $_.CommandLine.TrimStart() -replace "[\r\n]+", "$([char]0x2026) "
                                 </ScriptBlock>
                             </TableColumnItem>
                         </TableColumnItems>
@@ -132,7 +132,7 @@ This is Joel "Jaykul" Bennett's coloring format file for PowerShell 5.1
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                  [String]::Format("{0,10}  {1,8}", $_.LastWriteTime.ToString("d"), $_.LastWriteTime.ToString("t"))
+                [String]::Format("{0,10}  {1,8}", $_.LastWriteTime.ToString("d"), $_.LastWriteTime.ToString("t"))
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
@@ -140,24 +140,24 @@ This is Joel "Jaykul" Bennett's coloring format file for PowerShell 5.1
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                  if ($host.UI.SupportsVirtualTerminal) {
+                if ($host.UI.SupportsVirtualTerminal) {
                     $o = "$([char]27)[39m$([char]27)[49m"
                     $file = $_.Name + $o
 
                     if ($PSFileFormats.ContainsKey($_.Extension)) {
-                      $PSFileFormats[$_.Extension].Color + $PSFileFormats[$_.Extension].Icon + " " + $file
+                        $PSFileFormats[$_.Extension].Color + $PSFileFormats[$_.Extension].Icon + " " + $file
                     } elseif ($_ -is [System.IO.DirectoryInfo]) {
-                      if ($PSFileFormats.ContainsKey("Directory")) {
+                        if ($PSFileFormats.ContainsKey("Directory")) {
                         $PSFileFormats["Directory"].Color + $PSFileFormats["Directory"].Icon + " " + $file
-                      } else {
+                        } else {
                         $o + "  " + $_.Name
-                      }
+                        }
                     } else {
-                      $o + "  " + $_.Name
+                        $o + "  " + $_.Name
                     }
-                  } else {
+                } else {
                     $o + "  " + $_.Name
-                  }
+                }
                                 </ScriptBlock>
                             </TableColumnItem>
                         </TableColumnItems>
@@ -327,13 +327,13 @@ This is Joel "Jaykul" Bennett's coloring format file for PowerShell 5.1
                             <TableColumnItem>
                                 <ScriptBlock>
                                 if ($_.CommandType -eq "Alias") {
-                                  if ($_.ResolvedCommand -ne $null) {
-                                    $_.Name + " -> " + $_.ResolvedCommand.Name
-                                  } else {
-                                    $_.Name + " -> " + $_.Definition
-                                  }
+                                    if ($_.ResolvedCommand -ne $null) {
+                                        $_.Name + " -> " + $_.ResolvedCommand.Name
+                                    } else {
+                                        $_.Name + " -> " + $_.Definition
+                                    }
                                 } else {
-                                  $_.Name
+                                    $_.Name
                                 }
                                 </ScriptBlock>
                             </TableColumnItem>
