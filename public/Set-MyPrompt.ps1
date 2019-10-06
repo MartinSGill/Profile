@@ -1,15 +1,12 @@
 ﻿function Set-MyPrompt {
     [CmdletBinding()]
-    param(
-        # Don't use the special PowerLine characters
-        [Switch]$SafeCharacters
-    )
+    param()
 
     # Clear out any existing settings
     Remove-Item -Path (Get-ConfigurationPath -Module (Get-Module Powerline)) -Force -Recurse
 
     if (Get-Module posh-git) {
-        if ($SafeCharacters) {
+        if ($PromptUseSafeCharacters) {
             $GitPromptSettings.BeforeStatus.Text = "["
             $GitPromptSettings.DelimStatus.Text = " |"
             $GitPromptSettings.AfterStatus.Text = "]"
@@ -24,7 +21,7 @@
         RestoreVirtualTerminal = $true
         FullColor = $true
         SetCurrentDirectory = $true
-        PowerLineFont = (-not $SafeCharacters)
+        PowerLineFont = (-not $PromptUseSafeCharacters)
         Prompt = @()
         Save = $false
     }
@@ -40,35 +37,25 @@
         }
     }
 
-    $plArgs.Prompt += { Get-SegmentedPath -SegmentLimit 6 -ForegroundColor "Black" -BackgroundColor "White" }
+    $plArgs.Prompt += { New-PromptText (Get-PromptPathString) -ForegroundColor "Black" -BackgroundColor "White" }
 
     # $plArgs.Prompt += { "`t" }
 
-    if ($SafeCharacters) {
-        $plArgs.Prompt += {
-            if (-not [string]::IsNullOrWhiteSpace($(Get-Elapsed)) ) {
-                $pArgs = @{
-                    InputObject = " $(Get-Elapsed -Format "{0:ss\.ffff}") "
-                    ForegroundColor = "Black"
-                    BackgroundColor = "#E7FFAC"
-                    ErrorForegroundColor = "Black"
-                    ErrorBackgroundColor = "#FFABAB"
-                }
-                New-PromptText @pArgs
+    $plArgs.Prompt += {
+        if (-not [string]::IsNullOrWhiteSpace($(Get-Elapsed)) ) {
+            $pArgs = @{
+                InputObject = " 祥 $(Get-Elapsed -Format "{0:ss\.ffff}") "
+                ForegroundColor = "Black"
+                BackgroundColor = "#E7FFAC"
+                ErrorForegroundColor = "Black"
+                ErrorBackgroundColor = "#FFABAB"
             }
-        }
-    } else {
-        $plArgs.Prompt += {
-            if (-not [string]::IsNullOrWhiteSpace($(Get-Elapsed)) ) {
-                $pArgs = @{
-                    InputObject = " 祥 $(Get-Elapsed -Format "{0:ss\.ffff}") "
-                    ForegroundColor = "Black"
-                    BackgroundColor = "#E7FFAC"
-                    ErrorForegroundColor = "Black"
-                    ErrorBackgroundColor = "#FFABAB"
-                }
-                New-PromptText @pArgs
+
+            if ($PromptUseSafeCharacters) {
+                $pArgs.InputObject = " $(Get-Elapsed -Format "{0:ss\.ffff}") "
             }
+
+            New-PromptText @pArgs
         }
     }
 
@@ -78,33 +65,28 @@
 
     $plArgs.Prompt += { "`n" }
 
-    if ($SafeCharacters) {
-        $plArgs.Prompt += {
-            $pArgs = @{
-                InputObject = " $(Get-Date -Format "T") "
-                ForegroundColor = "Black"
-                BackgroundColor = "#BFFCC6"
-            }
-            New-PromptText @pArgs
+    $plArgs.Prompt += {
+        $pArgs = @{
+            InputObject = "  $(Get-Date -Format "T") "
+            ForegroundColor = "Black"
+            BackgroundColor = "#BFFCC6"
         }
-    } else {
-        $plArgs.Prompt += {
-            $pArgs = @{
-                InputObject = "  $(Get-Date -Format "T") "
-                ForegroundColor = "Black"
-                BackgroundColor = "#BFFCC6"
-            }
-            New-PromptText @pArgs
+        if ($PromptUseSafeCharacters) {
+            $pArgs.InputObject = " $(Get-Date -Format "T") "
         }
+        New-PromptText @pArgs
     }
 
     $plArgs.Prompt += {
         $pArgs = @{
-            InputObject = " $("{0}" -f $PSVersionTable.PSVersion.Major) >_ "
+            InputObject = " $("{0}" -f $PSVersionTable.PSVersion.Major) ﲵ"
             ForegroundColor = "Black"
             BackgroundColor = "#6EB5FF"
             ElevatedForegroundColor = "Black"
             ElevatedBackgroundColor = "#FFABAB"
+        }
+        if ($PromptUseSafeCharacters) {
+            InputObject = " $("{0}" -f $PSVersionTable.PSVersion.Major) >_"
         }
         New-PromptText @pArgs
     }

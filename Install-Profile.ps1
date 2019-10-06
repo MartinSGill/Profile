@@ -11,27 +11,27 @@ New-Item -ItemType Directory -Path "$ProfileDir\Modules" -Force | Convert-Path |
 try {
     $ErrorActionPreference = 'Stop'
 
-    # if(Test-Path Profile-master){
-    #     Write-Error "The Profile-master folder already exists, install cannot continue."
-    # }
-    # if (Test-Path Profile){
-    #     Write-Warning "The Profile module already exists, install will overwrite it and put the old one in Profile/old."
-    #     Remove-Item Profile/old -Recurse -Force -ErrorAction SilentlyContinue
-    # }
+    if(Test-Path Profile-master){
+        Write-Error "The Profile-master folder already exists, install cannot continue."
+    }
+    if (Test-Path Profile){
+        Write-Warning "The Profile module already exists, install will overwrite it and put the old one in Profile/old."
+        Remove-Item Profile/old -Recurse -Force -ErrorAction SilentlyContinue
+    }
 
-    # $ProgressPreference = "SilentlyContinue"
-    # Invoke-WebRequest https://github.com/Jaykul/Profile/archive/master.zip -OutFile Profile-master.zip
-    # $ProgressPreference = "Continue"
-    # Expand-Archive Profile-master.zip .
-    # $null = mkdir Profile-master\old
+    $ProgressPreference = "SilentlyContinue"
+    Invoke-WebRequest https://github.com/MartinSGill/Profile/archive/master.zip -OutFile Profile-master.zip
+    $ProgressPreference = "Continue"
+    Expand-Archive Profile-master.zip .
+    $null = mkdir Profile-master\old
 
-    # if (Test-Path Profile) {
-    #     Move-Item Profile\* Profile-master\old
-    #     Remove-Item Profile
-    # }
+    if (Test-Path Profile) {
+        Move-Item Profile\* Profile-master\old
+        Remove-Item Profile
+    }
 
-    # Rename-Item Profile-master Profile
-    # Remove-Item Profile-master.zip
+    Rename-Item Profile-master Profile
+    Remove-Item Profile-master.zip
 
     # Install the profile
     if (!$Force -and (Test-Path $Profile.CurrentUserAllHosts)) {

@@ -74,17 +74,18 @@ if (Get-Module PSReadline) {
 #####
 # Prompt
 #####
-
 switch -Regex ((Get-ParentProcess).Name) {
     'conemu|code|hyper|extraterm' {
+        $PromptUseSafeCharacters = $false
         Trace-Message "Funky Prompt"
-        Set-MyPrompt
     }
     Default {
+        $PromptUseSafeCharacters = $true
         Trace-Message "Safe Prompt"
-        Set-MyPrompt -SafeCharacters
     }
 }
+
+Set-MyPrompt
 
 #####
 # File Output Formats
@@ -96,11 +97,11 @@ if ($Configuration.FileColors) {
 }
 
 # Unfortunately, in order for our File Format colors and History timing to take prescedence, we need to PREPEND the path:
-Update-FormatData -PrependPath (Join-Path $PSScriptRoot 'Formats.ps1xml')
+Update-FormatData -PrependPath (Join-Path $PSScriptRoot 'Formats/Formats.ps1xml')
 
 #####
 # Exports
 #####
 
 Export-ModuleMember -Function *-*
-Export-ModuleMember -Alias * -Variable LiveID, QuoteDir
+Export-ModuleMember -Alias * -Variable LiveID, QuoteDir, PromptUseSafeCharacters
