@@ -10,8 +10,9 @@
       "args": [
         "-NoLogo",
         "-NoProfile",
-        "-NoExit"//,
-        //"-Command '{Import-Module ./Profile.psd1 -Verbose}'"
+        "-NoExit",
+        "-EncodedCommand",
+        "SQBtAHAAbwByAHQALQBNAG8AZAB1AGwAZQAgAC4ALwBQAHIAbwBmAGkAbABlAC4AcABzAGQAMQA="
       ],
       "options": {
         "cwd": "${workspaceRoot}",

@@ -16,21 +16,38 @@
 
 #>
 function Set-DockerHost {
-    [CmdletBinding()]
+    [CmdletBinding(PositionalBinding=$false)]
     Param (
-        # Name of the host.
-        [Parameter(Mandatory=$true)]
-        [string]$Name,
-
         # Path to an alternate config file.
         [Parameter(Mandatory=$false)]
-        [string]$Path = '~/.docker-hosts.psd1'
+        [string]$Path
     )
 
-    if ((Test-Path $Path)) {
-        $hosts = Import-PowerShellDataFile $Path
-        $env:DOCKER_HOST = $hosts[$Name]
-    } else {
-        throw "$Path not found."
+    DynamicParam {
+        $dictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+        if ([string]::IsNullOrWhiteSpace($Path)) { $testPath = '~/.docker-hosts.psd1' }
+        if ((Test-Path $testPath)) {
+            Write-Verbose "3"
+            try {
+                $hosts = Import-PowerShellDataFile $testPath
+                $options = $hosts.Keys
+            } catch {}
+        }
+        New-DynamicParam -Name Name -ValidateSet $options -Mandatory -DpDictionary $dictionary
+        return $dictionary
+    }
+
+    begin {
+        $Name = $PSBoundParameters.Name
+        if ([string]::IsNullOrWhiteSpace($Path)) { $Path = '~/.docker-hosts.psd1' }
+    }
+
+    process {
+        if ((Test-Path $Path)) {
+            $hosts = Import-PowerShellDataFile $Path
+            $env:DOCKER_HOST = $hosts[$Name]
+        } else {
+            throw "$Path not found."
+        }
     }
 }
