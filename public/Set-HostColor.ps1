@@ -20,23 +20,4 @@ function Set-HostColor {
     } else {
         Import-Theme Dark
     }
-
-    $PSReadLineOption = @{
-        AnsiEscapeTimeout             = 100
-        BellStyle                     = "Visual"
-        CompletionQueryItems          = 100
-        ContinuationPrompt            = ">> "
-        DingDuration                  = 50 #ms
-        DingTone                      = 1221
-        EditMode                      = "Windows"
-        HistoryNoDuplicates           = $true
-        HistorySaveStyle              = "SaveIncrementally"
-        HistorySearchCaseSensitive    = $false
-        HistorySearchCursorMovesToEnd = $false
-        MaximumHistoryCount           = 1024
-        MaximumKillRingCount          = 10
-        ShowToolTips                  = $true
-        WordDelimiters                = ";:,.[]{}()/\|^&*-=+"
-    }
-    Set-PSReadlineOption @PSReadLineOption
 }

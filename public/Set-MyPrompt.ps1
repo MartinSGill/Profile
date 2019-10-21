@@ -79,14 +79,14 @@
 
     $plArgs.Prompt += {
         $pArgs = @{
-            InputObject = " $("{0}" -f $PSVersionTable.PSVersion.Major) ﲵ"
+            InputObject = " $($PSVersionTable.PSVersion.Major) ﲵ"
             ForegroundColor = "Black"
             BackgroundColor = "#6EB5FF"
             ElevatedForegroundColor = "Black"
             ElevatedBackgroundColor = "#FFABAB"
         }
         if ($PromptUseSafeCharacters) {
-            InputObject = " $("{0}" -f $PSVersionTable.PSVersion.Major) >_"
+            $pArgs.InputObject = " $($PSVersionTable.PSVersion.Major) >_"
         }
         New-PromptText @pArgs
     }

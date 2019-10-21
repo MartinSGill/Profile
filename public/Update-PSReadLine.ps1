@@ -1,11 +1,30 @@
 
 function Update-PSReadLine {
+    $PSReadLineOption = @{
+        AnsiEscapeTimeout             = 100
+        BellStyle                     = "Visual"
+        CompletionQueryItems          = 100
+        ContinuationPrompt            = ">> "
+        DingDuration                  = 50 #ms
+        DingTone                      = 1221
+        EditMode                      = "Windows"
+        HistoryNoDuplicates           = $true
+        HistorySaveStyle              = "SaveIncrementally"
+        HistorySearchCaseSensitive    = $false
+        HistorySearchCursorMovesToEnd = $false
+        MaximumHistoryCount           = 4096
+        MaximumKillRingCount          = 10
+        ShowToolTips                  = $true
+        WordDelimiters                = ";:,.[]{}()/\|^&*-=+"
+    }
+
+    Set-PSReadlineOption @PSReadLineOption
     Set-PSReadlineKeyHandler Ctrl+Shift+C CaptureScreen
     Set-PSReadlineKeyHandler Ctrl+Shift+R ForwardSearchHistory
     Set-PSReadlineKeyHandler Ctrl+R ReverseSearchHistory
 
-    Set-PSReadlineKeyHandler Ctrl+DownArrow HistorySearchForward
-    Set-PSReadlineKeyHandler Ctrl+UpArrow HistorySearchBackward
+    Set-PSReadlineKeyHandler DownArrow HistorySearchForward
+    Set-PSReadlineKeyHandler UpArrow HistorySearchBackward
     Set-PSReadLineKeyHandler Ctrl+Home BeginningOfHistory
 
     Set-PSReadlineKeyHandler Ctrl+M SetMark
