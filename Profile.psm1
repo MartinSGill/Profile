@@ -55,13 +55,17 @@ if( Test-Path "${QuoteDir}\attributed quotes.txt" ) {
 # Live ID
 #####
 
-# If you log in with a Microsoft Identity, this will capture it
-Set-Variable LiveID (
-    [Security.Principal.WindowsIdentity]::GetCurrent().Groups.Where{
-        $_.Value -match "^S-1-11-96"
-    }.Translate([Security.Principal.NTAccount]).Value
-) -Option ReadOnly -ErrorAction SilentlyContinue
-
+try {
+    # If you log in with a Microsoft Identity, this will capture it
+    Set-Variable LiveID (
+        [Security.Principal.WindowsIdentity]::GetCurrent().Groups.Where{
+            $_.Value -match "^S-1-11-96"
+        }.Translate([Security.Principal.NTAccount]).Value
+    ) -Option ReadOnly -ErrorAction SilentlyContinue
+}
+catch {
+    # Can fail if not using a LiveId.
+}
 
 #####
 # PSReadline
