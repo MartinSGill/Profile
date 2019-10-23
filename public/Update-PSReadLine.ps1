@@ -11,7 +11,7 @@ function Update-PSReadLine {
         HistoryNoDuplicates           = $true
         HistorySaveStyle              = "SaveIncrementally"
         HistorySearchCaseSensitive    = $false
-        HistorySearchCursorMovesToEnd = $false
+        HistorySearchCursorMovesToEnd = $true
         MaximumHistoryCount           = 4096
         MaximumKillRingCount          = 10
         ShowToolTips                  = $true
