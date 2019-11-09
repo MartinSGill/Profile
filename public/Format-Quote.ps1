@@ -8,9 +8,6 @@
     $splitQuote = ($Text -split "--") | ForEach-Object { $_.Trim() }
     $quote = $splitQuote[0]
     $attrib = $splitQuote[1]
-
-    $lines = @()
-
     $myStack = New-Object System.Collections.Queue
     $quote -split " " | ForEach-Object { $myStack.Enqueue($_) }
 
