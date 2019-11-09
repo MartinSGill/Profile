@@ -12,7 +12,7 @@ function Test-ProfileVersion() {
                 Invoke-RestMethod   -Method Get `
                                     -Uri https://raw.githubusercontent.com/MartinSGill/Profile/master/Profile.psd1 `
             ) -split '\r?\n' |
-            Select-String -Pattern "ModuleVersion = '(1\.3\.1)'"
+            Select-String -Pattern "ModuleVersion = '([.0-9]+)'"
         ).Matches.Groups[1].Value
 
     $localVersion = Get-Module -ListAvailable -Name Profile | Select-Object -ExpandProperty Version -First 1
