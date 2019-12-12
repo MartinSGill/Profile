@@ -58,9 +58,9 @@ Trace-Message "Modules Imported" -Stopwatch $TraceVerboseTimer
 # I prefer that my sessions start in a predictable location, regardless of elevation, etc.
 if ($psEditor.Workspace.Path) { # in VS Code, start in the workspace!
     Set-Location $psEditor.Workspace.Path
-} else {
-    Set-Location $ProfileDir
 }
+
+Set-InvokeBuildCompleters
 
 Trace-Message "Profile Finished!" -KillTimer
 Remove-Variable TraceVerboseTimer

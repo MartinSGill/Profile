@@ -12,13 +12,13 @@
 RootModule = 'Profile.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.3.3'
+ModuleVersion = '1.3.4'
 
 # Supported PSEditions
-# CompatiblePSEditions = @()
+CompatiblePSEditions = @('Desktop', 'Core')
 
 # ID used to uniquely identify this module
-GUID = ''
+GUID = '996fce80-0908-45b6-8416-8d1782b4ff90'
 
 # Author of this module
 Author = 'Martin Gill'
