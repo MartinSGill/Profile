@@ -12,7 +12,7 @@
 RootModule = 'Profile.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.3.4'
+ModuleVersion = '1.3.5'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')

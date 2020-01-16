@@ -79,16 +79,17 @@ if (Get-Module PSReadline) {
 #####
 # Prompt
 #####
-switch -Regex ((Get-ParentProcess).Name) {
-    'conemu|code|hyper|extraterm' {
-        $PromptUseSafeCharacters = $false
-        Trace-Message "Funky Prompt"
-    }
-    Default {
-        $PromptUseSafeCharacters = $true
-        Trace-Message "Safe Prompt"
-    }
-}
+# switch -Regex ((Get-ParentProcess).Name) {
+#     'conemu|code|hyper|extraterm' {
+#         $PromptUseSafeCharacters = $false
+#         Trace-Message "Funky Prompt"
+#     }
+#     Default {
+#         $PromptUseSafeCharacters = $true
+#         Trace-Message "Safe Prompt"
+#     }
+# }
+$PromptUseSafeCharacters = $false
 
 Set-MyPrompt
 

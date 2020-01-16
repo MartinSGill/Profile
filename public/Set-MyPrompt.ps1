@@ -5,8 +5,16 @@
     # Clear out any existing settings
     Remove-Item -Path (Get-ConfigurationPath -Module (Get-Module Powerline)) -Force -Recurse
 
+    if ([string]::IsNullOrWhiteSpace($env:PROFILE_SAFE_CHARS))
+    {
+        $useSafeChars = $PromptUseSafeCharacters
+    } else {
+        $useSafeChars = [bool]$env:PROFILE_SAFE_CHARS
+    }
+
+
     if (Get-Module posh-git) {
-        if ($PromptUseSafeCharacters) {
+        if ($useSafeChars) {
             $GitPromptSettings.BeforeStatus.Text = "["
             $GitPromptSettings.DelimStatus.Text = " |"
             $GitPromptSettings.AfterStatus.Text = "]"
@@ -21,7 +29,7 @@
         RestoreVirtualTerminal = $true
         FullColor = $true
         SetCurrentDirectory = $true
-        PowerLineFont = (-not $PromptUseSafeCharacters)
+        PowerLineFont = (-not $useSafeChars)
         Prompt = @()
         Save = $false
     }
@@ -71,7 +79,7 @@
             ForegroundColor = "Black"
             BackgroundColor = "#BFFCC6"
         }
-        if ($PromptUseSafeCharacters) {
+        if ($useSafeChars) {
             $pArgs.InputObject = " $(Get-Date -Format "T") "
         }
         New-PromptText @pArgs
@@ -85,7 +93,7 @@
             ElevatedForegroundColor = "Black"
             ElevatedBackgroundColor = "#FFABAB"
         }
-        if ($PromptUseSafeCharacters) {
+        if ($useSafeChars) {
             $pArgs.InputObject = " $($PSVersionTable.PSVersion.Major) >_"
         }
         New-PromptText @pArgs
