@@ -7,7 +7,7 @@
 
     if ([string]::IsNullOrWhiteSpace($env:PROFILE_SAFE_CHARS))
     {
-        $useSafeChars = $PromptUseSafeCharacters
+        $useSafeChars = $false
     } else {
         $useSafeChars = [bool]$env:PROFILE_SAFE_CHARS
     }
@@ -59,7 +59,7 @@
                 ErrorBackgroundColor = "#FFABAB"
             }
 
-            if ($PromptUseSafeCharacters) {
+            if ($useSafeChars) {
                 $pArgs.InputObject = " $(Get-Elapsed -Format "{0:ss\.ffff}") "
             }
 

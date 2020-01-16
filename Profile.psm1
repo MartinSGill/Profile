@@ -79,17 +79,7 @@ if (Get-Module PSReadline) {
 #####
 # Prompt
 #####
-# switch -Regex ((Get-ParentProcess).Name) {
-#     'conemu|code|hyper|extraterm' {
-#         $PromptUseSafeCharacters = $false
-#         Trace-Message "Funky Prompt"
-#     }
-#     Default {
-#         $PromptUseSafeCharacters = $true
-#         Trace-Message "Safe Prompt"
-#     }
-# }
-$PromptUseSafeCharacters = $false
+# Set PROFILE_SAFE_CHARS to use non powerline chars.
 
 Set-MyPrompt
 
