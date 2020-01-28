@@ -49,7 +49,7 @@ if ("Desktop" -eq $PSVersionTable.PSEdition) {
     }
 }
 
-Import-Module -FullyQualifiedName @{ ModuleName = "Profile";           ModuleVersion = "1.0.0" } -Verbose:$false
+Import-Module -FullyQualifiedName @{ ModuleName = "Profile"; ModuleVersion = "1.4.1" } -Verbose:$false
 
 # First call to Trace-Message, pass in our TraceTimer that I created at the top to make sure we time EVERYTHING.
 # This has to happen after the verbose check, obviously
