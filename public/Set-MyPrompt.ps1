@@ -1,4 +1,10 @@
 ﻿function Set-MyPrompt {
+    <#
+    .SYNOPSIS
+        Configures preferred prompt format.
+    .Notes
+        Set $env:PROFILE_SAFE_CHARS to force non-Powerline font characters.
+    #>
     [CmdletBinding()]
     param()
 

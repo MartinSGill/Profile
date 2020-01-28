@@ -1,8 +1,23 @@
 ﻿function Format-Quote {
+    <#
+        .Synopsis
+            Pretty print a quote.
+        .Notes
+            The quote must be a single-line string with the quote attribution
+            after the last '--'.
+    #>
     [CmdletBinding()]
     param (
-        [string]$Text,
-        [Int]$Width = 50
+        [Parameter(Mandatory=$true,
+        ValueFromPipeline=$true,
+        ValueFromPipelineByPropertyName=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        # The text to format.
+        $Text,
+        [Int]
+        # Width of the displayed qoute.
+        $Width = 50
     )
 
     $splitQuote = ($Text -split "--") | ForEach-Object { $_.Trim() }

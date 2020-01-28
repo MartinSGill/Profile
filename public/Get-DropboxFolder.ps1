@@ -1,12 +1,13 @@
 
 function Get-DropBoxFolder {
-    ##############################
-    #.SYNOPSIS
-    #   Find the location where Dropbox stores files
-    #   for the current user.
-    ##############################
+    <#
+        .SYNOPSIS
+            Find the location where Dropbox stores files
+            for the current user.
+    #>
     [CmdletBinding()]
     param ()
+
     $info = $null;
     if (Test-Path (Join-Path $env:APPDATA "dropbox\info.json")) {
         Write-Verbose "Found dropbox info in APPDATA"

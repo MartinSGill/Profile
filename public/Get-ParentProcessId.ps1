@@ -1,5 +1,9 @@
 
 function Get-ParentProcessId {
+    <#
+        .Synopsis
+            Get the Process Id of the current process' parent.
+    #>
     [CmdletBinding()]
     param ()
 

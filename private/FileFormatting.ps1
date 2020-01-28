@@ -1,4 +1,5 @@
 
+# This is based on Joel "Jaykul" Bennett's work.
 class FileFormat {
     [string]$Color
     [char]$Icon

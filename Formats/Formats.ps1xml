@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- *******************************************************************
-This is Joel "Jaykul" Bennett's coloring format file for PowerShell 5.1
+This is based on Joel "Jaykul" Bennett's coloring format file for PowerShell 5.1
 ******************************************************************** -->
 <Configuration>
     <SelectionSets>

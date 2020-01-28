@@ -1,11 +1,8 @@
-<#
-.SYNOPSIS
-
-Tests if the repo version of the module is the same as the local version.
-
-#>
-
 function Test-ProfileVersion() {
+    <#
+    .SYNOPSIS
+        Tests if the repo version of the module is the same as the local version.
+    #>
 
     $repoVersion = [version](
             (

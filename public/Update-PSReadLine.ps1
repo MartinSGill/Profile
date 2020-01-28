@@ -1,5 +1,9 @@
 
 function Update-PSReadLine {
+    <#
+        .Synopsis
+            Preferred PSReadline Settings.
+    #>
     $PSReadLineOption = @{
         AnsiEscapeTimeout             = 100
         BellStyle                     = "Visual"

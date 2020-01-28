@@ -1,7 +1,16 @@
 ﻿function Get-PromptPathString() {
+    <#
+        .Synopsis
+            Returns a string representing the current path.
+        .Notes
+            Set $env:PROFILE_SAFE_CHARS to use only non-Powerline font
+            characters.
+    #>
     [CmdletBinding()]
     param (
-        [Int]$Segments = 6
+        [Int]
+        # Max number of path segments to return. Path is shortened if needed.
+        $Segments = 6
     )
 
     $dirSep = [System.IO.Path]::DirectorySeparatorChar;
@@ -16,7 +25,7 @@
     }
     $resultPathArray += $splitPath | Select-Object -Last ($Segments - 2)
     $resultPath = $resultPathArray -join $dirSep
-    $dirIcon = if ($PromptUseSafeCharacters) {
+    $dirIcon = if ($env:PROFILE_SAFE_CHARS) {
         " "
     } else {
         if ($resultPath -eq "~") {
