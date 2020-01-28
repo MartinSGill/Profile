@@ -12,7 +12,6 @@
         $useSafeChars = [bool]$env:PROFILE_SAFE_CHARS
     }
 
-
     if (Get-Module posh-git) {
         if ($useSafeChars) {
             $GitPromptSettings.BeforeStatus.Text = "["
