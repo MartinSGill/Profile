@@ -70,6 +70,8 @@ try {
     $gallery = Get-PSRepository PSGallery
     Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 
+    Write-Host "! Beginning Module Updates"
+
     # Ensure PowershellGet is up-to-date
     Write-Verbose "Updating PowershellGet."
     Install-Module PowershellGet -Force -Scope $Scope -AllowClobber -MinimumVersion 2.2.1
@@ -83,7 +85,7 @@ try {
     # Reset Policy
     Write-Verbose "Resetting PSGallery Policy."
     Set-PSRepository -Name PSGallery -InstallationPolicy $gallery.InstallationPolicy
-
+    Write-Host "! Done With Module Updates"
 } catch {
     Write-Host -ForegroundColor Red -Object $_.Exception
 }
