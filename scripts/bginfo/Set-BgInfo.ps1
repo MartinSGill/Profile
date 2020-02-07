@@ -16,5 +16,7 @@ if (-not (Test-Path "default.bgi")) {
 
 if ($NoClean) { return }
 
+Start-Sleep -Seconds 2
+
 Remove-Item -Path './bginfo.exe'
 Remove-Item -Path './default.bgi'
