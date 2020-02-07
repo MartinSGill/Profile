@@ -12,7 +12,7 @@ if (-not (Test-Path "default.bgi")) {
     Invoke-WebRequest -Uri https://raw.githubusercontent.com/MartinSGill/Profile/master/scripts/bginfo/default.bgi -OutFile './default.bgi'
 }
 
-./bginfo.exe /silent "default.bgi"
+./bginfo.exe "default.bgi" /silent /nolicprompt /timer:0
 
 if ($NoClean) { return }
 
