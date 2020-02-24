@@ -55,10 +55,10 @@ try {
     } else {
         Set-Content $Profile.CurrentUserAllHosts @'
         $actual = @(
+            "$Home\source\repos\Profile\profile.ps1"
             "$PSScriptRoot\Modules\Profile\profile.ps1"
             "A:\.pscloudshell\PowerShell\Modules\Profile\profile.ps1"
-            "$Home\source\repos\Profile\profile.ps1"
-        ).Where({Test-Path $_}, 1)
+        ) | Where-Object {Test-Path $_} | Select-Object -First 1
 
         Write-Host "Profile: $actual"
         . $actual

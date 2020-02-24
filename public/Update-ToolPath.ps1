@@ -35,7 +35,7 @@ function Update-ToolPath {
 
     if (Get-Command docker -ErrorAction SilentlyContinue) {
         New-Alias -Name 'd' -Value docker -Scope Global
-        Import-Module posh-docker
+        Import-Module DockerCompletion
     }
 
     if (Get-Command docker-compose.exe -ErrorAction SilentlyContinue) {
@@ -48,6 +48,10 @@ function Update-ToolPath {
 
     if (Test-Path 'c:\Program Files\Sublime Merge\smerge.exe') {
         New-Alias -Name 'sm' -Value 'c:\Program Files\Sublime Merge\smerge.exe' -Scope Global
+    }
+
+    if (Get-Command -Name 'code-insiders.cmd' -ErrorAction SilentlyContinue) {
+        New-Alias -Name 'ci' -Value 'code-insiders.cmd' -Scope Global
     }
 
     Trace-Message "Development aliases set"

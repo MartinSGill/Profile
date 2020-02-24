@@ -12,7 +12,7 @@
 RootModule = 'Profile.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.4.2'
+ModuleVersion = '1.5.0'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -27,7 +27,7 @@ Author = 'Martin Gill'
 CompanyName = '52752d2d-15f1-4358-bb8a-371b506ad056'
 
 # Copyright statement for this module
-Copyright = '(c) 2019 Martin Gill. All rights reserved.'
+Copyright = '(c) 2019-2020, Martin Gill. All rights reserved.'
 
 # Description of the functionality provided by this module
 # Description = ''

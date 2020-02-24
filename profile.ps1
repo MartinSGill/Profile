@@ -7,6 +7,9 @@ ${;} = [System.IO.Path]::PathSeparator
 # 1. Fix the PSModulePath and then
 # 2. Import the Profile module (which this script is part of, technically)
 
+$profileDef = [Scriptblock]::Create((Get-Content $PSScriptRoot\profile.psd1 -Raw)).Invoke()
+Write-Host "Profile Module: v$($profileDef.ModuleVersion)"
+
 ## Set the profile directory first, so we can refer to it from now on.
 Set-Variable ProfileDir (Split-Path $Profile.CurrentUserAllHosts -Parent) -Scope Global -Option AllScope, Constant -ErrorAction SilentlyContinue
 
@@ -35,8 +38,12 @@ Import-Module -FullyQualifiedName   @{ ModuleName="Environment";      ModuleVers
                                     @{ ModuleName="posh-git";         ModuleVersion="1.0.0" },
                                     @{ ModuleName="PSReadLine";       ModuleVersion="2.0.0" } # -Verbose:$false
 
+if (![string]::IsNullOrWhiteSpace($env:PROFILE_VERBOSE)) {
+    $VerbosePreference = "Continue";
+}
+
 # If it's Windows PowerShell, we can turn on Verbose output if you're holding shift
-if ("Desktop" -eq $PSVersionTable.PSEdition) {
+if (("Desktop" -eq $PSVersionTable.PSEdition) -or ($PSVersionTable.PSVersion.Major -ge 7)) {
     # Check SHIFT state ASAP at startup so I can use that to control verbosity :)
     Add-Type -Assembly PresentationCore, WindowsBase
     try {
@@ -61,6 +68,7 @@ if ($psEditor.Workspace.Path) { # in VS Code, start in the workspace!
 }
 
 Set-InvokeBuildCompleters
+Set-DotNetCompleters
 
 # Set error message format.
 $global:ErrorView = "ConciseView"
