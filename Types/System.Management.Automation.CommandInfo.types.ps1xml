@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+  <Type>
+    <Name>System.Management.Automation.CommandInfo</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>Syntax</Name>
+        <GetScriptBlock>($this | Get-Command -Syntax | Out-String).Trim()</GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Synopsis</Name>
+        <GetScriptBlock>($this | Get-Help).Synopsis.Trim()</GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+</Types>

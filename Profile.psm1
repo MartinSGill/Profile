@@ -1,4 +1,6 @@
 ﻿
+Add-Type -Path "$PSScriptRoot\dlls\Humanizer.dll"
+
 #####
 # Sub-Modules
 #####
@@ -93,7 +95,8 @@ if ($Configuration.FileColors) {
 }
 
 # Unfortunately, in order for our File Format colors and History timing to take prescedence, we need to PREPEND the path:
-Update-FormatData -PrependPath (Join-Path $PSScriptRoot 'Formats/Formats.ps1xml')
+Update-FormatData -PrependPath (Join-Path $PSScriptRoot 'Formats/FileSystemTypes.formats.ps1xml')
+Update-FormatData -PrependPath (Join-Path $PSScriptRoot 'Formats/TimeSpan.formats.ps1xml')
 
 #####
 # Exports

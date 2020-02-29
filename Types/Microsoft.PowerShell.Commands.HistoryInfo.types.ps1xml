@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+  <Type>
+    <Name>Microsoft.PowerShell.Commands.HistoryInfo</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>Duration</Name>
+        <GetScriptBlock>
+                    $this.EndExecutionTime - $this.StartExecutionTime
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+</Types>

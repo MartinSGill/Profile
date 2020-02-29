@@ -12,7 +12,7 @@
 RootModule = 'Profile.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.5.0'
+ModuleVersion = '2.0.0'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -66,10 +66,29 @@ RequiredModules = @(@{ ModuleName="Environment";      ModuleVersion="1.1.0" },
 # ScriptsToProcess = @()
 
 # Type files (.ps1xml) to be loaded when importing this module
-TypesToProcess = 'Formats\Types.ps1xml'
+TypesToProcess = @(
+    "Types/Microsoft.PowerShell.Commands.HistoryInfo.types.ps1xml",
+    "Types/Microsoft.PowerShell.Commands.MemberDefinition.types.ps1xml",
+    "Types/System.Byte.types.ps1xml",
+    "Types/System.ByteArray.types.ps1xml",
+    "Types/System.DateTime.types.ps1xml",
+    "Types/System.Double.types.ps1xml",
+    "Types/System.Int16.types.ps1xml",
+    "Types/System.Int32.types.ps1xml",
+    "Types/System.Int64.types.ps1xml",
+    "Types/System.IO.FileInfo.types.ps1xml",
+    "Types/System.Management.Automation.CmdletInfo.Custom.types.ps1xml",
+    "Types/System.Management.Automation.CommandInfo.types.ps1xml",
+    "Types/System.SByte.types.ps1xml",
+    "Types/System.Security.SecureString.types.ps1xml",
+    "Types/System.String.types.ps1xml",
+    "Types/System.TimeSpan.types.ps1xml",
+    "Types/System.UInt16.types.ps1xml",
+    "Types/System.UInt32.types.ps1xml",
+    "Types/System.UInt64.types.ps1xml")
 
 # Format files (.ps1xml) to be loaded when importing this module
-FormatsToProcess = 'Formats\Formats.ps1xml'
+#FormatsToProcess = ''
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
 # NestedModules = @()
