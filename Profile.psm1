@@ -18,8 +18,6 @@ Get-ChildItem -Path $PSScriptRoot\Public\* -Filter "*.ps1" | ForEach-Object {
 # Colours
 #####
 
-# Set the colors as early as we can (before any output)
-Set-HostColor
 
 if(!$ProfileDir -or !(Test-Path $ProfileDir)) {
     $ProfileDir = Split-Path $Profile.CurrentUserAllHosts
@@ -78,12 +76,7 @@ if (Get-Module PSReadline) {
     Update-PSReadLine
 }
 
-#####
-# Prompt
-#####
-# Set PROFILE_SAFE_CHARS to use non powerline chars.
-
-Set-MyPrompt
+Invoke-Expression (& starship init powershell)
 
 #####
 # File Output Formats

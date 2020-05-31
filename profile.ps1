@@ -31,11 +31,7 @@ $Env:PSModulePath = @(
 ) -join ${;}
 
 # Note these are dependencies of the Profile module, but it's faster to load them explicitly up front
-Import-Module -FullyQualifiedName   @{ ModuleName="Environment";      ModuleVersion="1.1.0" },
-                                    @{ ModuleName="Configuration";    ModuleVersion="1.3.1" },
-                                    @{ ModuleName="Pansies";          ModuleVersion="1.4.0" },
-                                    @{ ModuleName="PowerLine";        ModuleVersion="3.1.1" },
-                                    @{ ModuleName="posh-git";         ModuleVersion="1.0.0" },
+Import-Module -FullyQualifiedName   @{ ModuleName="Pansies";          ModuleVersion="1.4.0" },
                                     @{ ModuleName="PSReadLine";       ModuleVersion="2.0.0" } # -Verbose:$false
 
 if (![string]::IsNullOrWhiteSpace($env:PROFILE_VERBOSE)) {

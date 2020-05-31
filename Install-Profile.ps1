@@ -1,3 +1,6 @@
+#Requires -Version 7.0
+#Requires -RunAsAdministrator
+
 [CmdletBinding()]
 param(
     [Switch]$Force,
@@ -86,6 +89,19 @@ try {
     Write-Verbose "Resetting PSGallery Policy."
     Set-PSRepository -Name PSGallery -InstallationPolicy $gallery.InstallationPolicy
     Write-Host "! Done With Module Updates"
+
+    Write-Host "Ensuring Starship available."
+    if (-not (Get-Command -name starship -ErrorAction SilentlyContinue)) {
+        if (-not (Get-Command -Name scoop -ErrorAction SilentlyContinue))
+        {
+            Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+        }
+
+        scoop install starship
+        scoop bocket add nerdfonts
+        scoop install firacode-nf
+        Write-Host "Please ensure your terminal/console font is set to 'FiraCode NF'. Recommended terminal: http://aka.ms/terminal"
+    }
 } catch {
     Write-Host -ForegroundColor Red -Object $_.Exception
 }
