@@ -12,7 +12,7 @@
 RootModule = 'Profile.psm1'
 
 # Version number of this module.
-ModuleVersion = '3.0.0'
+ModuleVersion = '3.0.1'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -51,9 +51,7 @@ Copyright = '(c) 2019-2020, Martin Gill. All rights reserved.'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = @(@{ ModuleName="PSReadLine";       ModuleVersion="2.0.0" },
-                    @{ ModuleName="posh-git";         ModuleVersion="1.0.0" }
-                    )
+RequiredModules = @("PSReadLine", "posh-git", "environment", "configuration");
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()

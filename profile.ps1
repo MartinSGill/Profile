@@ -8,7 +8,7 @@ ${;} = [System.IO.Path]::PathSeparator
 # 2. Import the Profile module (which this script is part of, technically)
 
 $profileDef = [Scriptblock]::Create((Get-Content $PSScriptRoot\profile.psd1 -Raw)).Invoke()
-Write-Host "Profile Module: v$($profileDef.ModuleVersion)"
+Write-Host "Profile Module: v$($profileDef.ModuleVersion)" -ForegroundColor DarkGray
 
 ## Set the profile directory first, so we can refer to it from now on.
 Set-Variable ProfileDir (Split-Path $Profile.CurrentUserAllHosts -Parent) -Scope Global -Option AllScope, Constant -ErrorAction SilentlyContinue

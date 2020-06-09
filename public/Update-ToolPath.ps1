@@ -12,30 +12,14 @@ function Update-ToolPath {
     ## I add my "Scripts" directory and all of its direct subfolders to my PATH
     [string[]]$folders = Get-ChildItem $ProfileDir\Tool[s], $ProfileDir\Utilitie[s], $ProfileDir\Script[s]\*, $ProfileDir\Script[s] -ad | % FullName
 
-    ## Developer tools stuff ...
-    ## I need MSBuild, and TF (TFS) and they're all in the .Net RuntimeDirectory OR Visual Studio*\Common7\IDE
-    # if("System.Runtime.InteropServices.RuntimeEnvironment" -as [type]) {
-    #     $folders += [System.Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory()
-    # }
-
-    # Set-AliasToFirst -Alias "iis","iisexpress" -Path 'C:\Progra*\IIS*\IISExpress.exe' -Description "IISExpress"
-    # $folders += Set-AliasToFirst -Alias "msbuild" -Path 'C:\Program*Files*\*Visual?Studio*\*\*\MsBuild\*\Bin\MsBuild.exe', 'C:\Program*Files*\MSBuild\*\Bin\MsBuild.exe' -Description "Visual Studio's MsBuild" -Force -Passthru
-    # $folders += Set-AliasToFirst -Alias "tf" -Path "C:\Program*Files*\*Visual?Studio*\*\*\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team?Explorer\TF.exe", "C:\Program*Files*\*Visual?Studio*\Common7\IDE\TF.exe" -Description "TFVC" -Force -Passthru
-
-    # if ($python = Set-AliasToFirst -Alias "Python", "py" -Path "C:\Program*Files*\Anaconda3*\python.exe", "C:\Program*Files*\*Visual?Studio*\Shared\Anaconda3*\python.exe" -Description "Python 3.x" -Force -Passthru) {
-    #     $folders += $python
-    #     $folders += @("Library\mingw-w64\bin", "Library\usr\bin", "Library\bin", "Scripts").ForEach({[io.path]::Combine($python, $_)})
-    #     if ($python -match "conda") {
-    #         $ENV:CONDA_PREFIX = $python
-    #     }
-    # }
-
-    ## I don't use Python2 lately, but I can't quite convince myself I won't need it again
-    #   $folders += Set-AliasToFirst -Alias "Python2", "py2" -Path "C:\Program*Files*\Anaconda3\python.exe", "C:\Python2*\python.exe" -Description "Python 2.x" -Force -Passthru
-
     if (Get-Command docker -ErrorAction SilentlyContinue) {
         New-Alias -Name 'd' -Value docker -Scope Global
         Import-Module DockerCompletion
+        if (-not $?) {
+            Write-Warning "DockerCompletion module not found, installing."
+            Install-Module DockerCompletion -Scope CurrentUser
+            Import-Module DockerCompletion
+        }
     }
 
     if (Get-Command docker-compose.exe -ErrorAction SilentlyContinue) {

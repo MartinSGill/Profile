@@ -6,12 +6,13 @@ Add-Type -Path "$PSScriptRoot\dlls\Humanizer.dll"
 #####
 
 Get-ChildItem -Path $PSScriptRoot\Private\* -Filter "*.ps1" | ForEach-Object {
+    Trace-Message "Sourcing: '$($_.FullName)'"
     . $_.FullName
-    Trace-Message "Sourced: $_"
+
 }
 Get-ChildItem -Path $PSScriptRoot\Public\* -Filter "*.ps1" | ForEach-Object {
+    Trace-Message "Sourcing: '$($_.FullName)'"
     . $_.FullName
-    Trace-Message "Sourced: $_"
 }
 
 #####
