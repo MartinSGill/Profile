@@ -31,8 +31,7 @@ $Env:PSModulePath = @(
 ) -join ${;}
 
 # Note these are dependencies of the Profile module, but it's faster to load them explicitly up front
-Import-Module -FullyQualifiedName   @{ ModuleName="Pansies";          ModuleVersion="1.4.0" },
-                                    @{ ModuleName="PSReadLine";       ModuleVersion="2.0.0" } # -Verbose:$false
+Import-Module -Name 'Pansies','PSReadline','Configuration','Environment'
 
 if (![string]::IsNullOrWhiteSpace($env:PROFILE_VERBOSE)) {
     $VerbosePreference = "Continue";

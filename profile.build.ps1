@@ -26,19 +26,26 @@ task warnPwsh -If { $PSVersionTable.PSVersion.Major -lt 7 } {
 # Synopsis: Ensure valid build environment
 task bootstrap warnPwsh, installTools, installModules
 
-# Synopsis: Updatae the Help documents
+# Synopsis: Create the Help documents
+task newModuleHelp -if { -not (Test-Path './docs') } bootstrap, {
+    Import-Module -Name platyps -MinimumVersion 0.14.0
+    New-MarkdownHelp -Module Profile `
+                    -AlphabeticParamsOrder `
+                    -OutputFolder ./docs `
+                    -WithModulePage
+}
+
+# Synopsis: Update the Help documents
 task updateHelp bootstrap, {
     if (Get-Command -Name pwsh -ErrorAction SilentlyContinue) {
-        pwsh -NoProfile -NonInteractive -Command {
+        pwsh -NonInteractive -Command {
             Import-Module -Name platyps -MinimumVersion 0.14.0
-            Import-Module -Name ./Profile.psd1
             Update-MarkdownHelp -Path ./docs
         }
     } else {
         Write-Warning "PWSH not found. Falling back to powershell."
-        powershell -NoProfile -NonInteractive -Command {
+        powershell -NonInteractive -Command {
             Import-Module -Name platyps -MinimumVersion 0.14.0
-            Import-Module -Name ./Profile.psd1
             Update-MarkdownHelp -Path ./docs
         }
     }
