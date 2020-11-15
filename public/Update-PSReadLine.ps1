@@ -20,6 +20,7 @@ function Update-PSReadLine {
         MaximumKillRingCount          = 10
         ShowToolTips                  = $true
         WordDelimiters                = ";:,.[]{}()/\|^&*-=+"
+        PredictionSource              = 'History'
     }
 
     Set-PSReadlineOption @PSReadLineOption

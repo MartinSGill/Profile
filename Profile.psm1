@@ -19,6 +19,10 @@ Get-ChildItem -Path $PSScriptRoot\Public\* -Filter "*.ps1" | ForEach-Object {
 # Colours
 #####
 
+$Host.PrivateData.VerboseForegroundColor = [System.ConsoleColor]::Gray
+$Host.PrivateData.DebugForegroundColor = [System.ConsoleColor]::DarkBlue
+$Host.PrivateData.WarningForegroundColor = [System.ConsoleColor]::Yellow
+$Host.PrivateData.ErrorForegroundColor = [System.ConsoleColor]::Red
 
 if(!$ProfileDir -or !(Test-Path $ProfileDir)) {
     $ProfileDir = Split-Path $Profile.CurrentUserAllHosts
