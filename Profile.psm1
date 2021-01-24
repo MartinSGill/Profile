@@ -81,7 +81,9 @@ if (Get-Module PSReadline) {
     Update-PSReadLine
 }
 
-Invoke-Expression (& starship init powershell)
+# Invoke-Expression (& starship init powershell)
+Import-Module oh-my-posh
+Set-PoshPrompt -Theme (Join-Path $PSScriptRoot 'themes' -AdditionalChildPath 'mytheme.omp.json')
 
 #####
 # File Output Formats

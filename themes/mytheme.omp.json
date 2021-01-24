@@ -1,0 +1,130 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh3/main/themes/schema.json",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "session",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#100e23",
+          "background": "#ffffff"
+        },
+        {
+          "type": "path",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#100e23",
+          "background": "#91ddff",
+          "properties" : {
+              "home_icon": "\uF7DB",
+              "folder_icon": "\uF115",
+              "folder_separator_icon": " \uE0B1 ",
+              "style": "agnoster"
+          }
+        },
+        {
+          "type": "git",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#193549",
+          "background": "#95ffa4"
+        },
+        {
+          "type": "node",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#ffffff",
+          "background": "#6CA35E",
+          "properties": {
+            "prefix": " \uE718 "
+          }
+        },
+        {
+          "type": "node",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#ffffff",
+          "background": "#6CA35E",
+          "properties": {
+            "prefix": " \uE718 "
+          }
+        },
+        {
+          "type": "dotnet",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#ffffff",
+          "background": "#512bd4",
+          "properties": {
+            "prefix": " \uE77F "
+          }
+        },
+        {
+          "type": "kubectl",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#ffffff",
+          "background": "#3371e3",
+          "properties": {
+            "prefix": " \uF1B3 "
+          }
+        },
+        {
+          "type": "terraform",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#ffffff",
+          "background": "#3c2aa8",
+          "properties": {
+            "prefix": " \uF6E6 "
+          }
+        }
+      ]
+    },
+    {
+      "type": "newline"
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "time",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "background": "#99ccff",
+          "foreground": "#007ACC",
+          "properties": {
+            "time_format": "15:04:05"
+          }
+        },
+        {
+            "type": "root",
+            "style": "powerline",
+            "powerline_symbol": "\uE0B0",
+            "foreground": "#193549",
+            "background": "#ffff66"
+        },
+        {
+          "type": "exit",
+          "style": "diamond",
+          "foreground": "#ffffff",
+          "background": "#2e9599",
+          "leading_diamond": "",
+          "trailing_diamond": "\uE0B4",
+          "properties": {
+            "display_exit_code": false,
+            "always_enabled": true,
+            "error_color": "#f1184c",
+            "color_background": true,
+            "prefix": "<transparent>\uE0B0</> \uE23A"
+          }
+        }
+      ]
+    }
+  ],
+  "final_space": true
+}

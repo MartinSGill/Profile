@@ -78,10 +78,4 @@ function Update-PSReadLine {
             [Microsoft.PowerShell.PSConsoleReadLine]::Ding()
         }
     }
-
-    ## There were some problems with hosts using PSReadLine who shouldn't
-    if ($Host.Name -ne "ConsoleHost") {
-        Remove-Module PSReadLine -ErrorAction SilentlyContinue
-        Trace-Message "PSReadLine unloaded!"
-    }
 }

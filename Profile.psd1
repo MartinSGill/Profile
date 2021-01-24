@@ -12,7 +12,7 @@
 RootModule = 'Profile.psm1'
 
 # Version number of this module.
-ModuleVersion = '3.1.0'
+ModuleVersion = '4.0.0'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -27,7 +27,7 @@ Author = 'Martin Gill'
 CompanyName = '52752d2d-15f1-4358-bb8a-371b506ad056'
 
 # Copyright statement for this module
-Copyright = '(c) 2019-2020, Martin Gill. All rights reserved.'
+Copyright = '(c) 2019-2021, Martin Gill. All rights reserved.'
 
 # Description of the functionality provided by this module
 # Description = ''
@@ -51,7 +51,7 @@ Copyright = '(c) 2019-2020, Martin Gill. All rights reserved.'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = @("PSReadLine", "posh-git", "environment", "configuration", "Pansies");
+RequiredModules = @("PSReadLine", "posh-git", "environment", "configuration", "Pansies", 'oh-my-posh');
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
