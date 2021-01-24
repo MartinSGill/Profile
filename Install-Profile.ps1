@@ -97,8 +97,7 @@ try {
             Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
         }
 
-        scoop install starship
-        scoop bocket add nerdfonts
+        scoop bucket add nerdfonts
         scoop install firacode-nf
         Write-Host "Please ensure your terminal/console font is set to 'FiraCode NF'. Recommended terminal: http://aka.ms/terminal"
     }
