@@ -1,7 +1,36 @@
 ﻿trap { Write-Warning ($_.ScriptStackTrace | Out-String) }
+
+###
+### Tracing
+###
+
+# If it's Windows PowerShell, we can turn on Verbose output if you're holding shift
+if (("Desktop" -eq $PSVersionTable.PSEdition) -or ($PSVersionTable.PSVersion.Major -ge 7)) {
+    # Check SHIFT state ASAP at startup so I can use that to control verbosity :)
+    Add-Type -Assembly PresentationCore, WindowsBase
+    try {
+        if ([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftShift) -OR
+            [System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::RightShift)) {
+            $VerbosePreference = "Continue"
+        }
+    } catch {
+        # If that didn't work ... oh well.
+    }
+}
+
+if (![string]::IsNullOrWhiteSpace($env:PROFILE_VERBOSE)) {
+    $VerbosePreference = "Continue";
+}
+
 # This timer is used by Trace-Message, I want to start it immediately
 $TraceVerboseTimer = New-Object System.Diagnostics.Stopwatch
 $TraceVerboseTimer.Start()
+Trace-Message "Tracing Started" -Stopwatch $TraceVerboseTimer
+
+###
+### Start
+###
+
 ${;} = [System.IO.Path]::PathSeparator
 # The job of the profile script is to:
 # 1. Fix the PSModulePath and then
@@ -9,6 +38,7 @@ ${;} = [System.IO.Path]::PathSeparator
 
 $profileDef = [Scriptblock]::Create((Get-Content $PSScriptRoot\profile.psd1 -Raw)).Invoke()
 Write-Host "Profile Module: v$($profileDef.ModuleVersion)" -ForegroundColor DarkGray
+Trace-Message "Print Version" -Stopwatch $TraceVerboseTimer
 
 ## Set the profile directory first, so we can refer to it from now on.
 Set-Variable ProfileDir (Split-Path $Profile.CurrentUserAllHosts -Parent) -Scope Global -Option AllScope, Constant -ErrorAction SilentlyContinue
@@ -29,41 +59,20 @@ $Env:PSModulePath = @(
     # Guarantee my ~\source\PSModules are there so I can load my dev projects
     @("$Home\source\PSModules") | Select-Object -Unique
 ) -join ${;}
+Trace-Message "Updated ModulePath" -Stopwatch $TraceVerboseTimer
 
 # Note these are dependencies of the Profile module, but it's faster to load them explicitly up front
-Import-Module -Name 'Pansies','PSReadline','Configuration','Environment'
-
-if (![string]::IsNullOrWhiteSpace($env:PROFILE_VERBOSE)) {
-    $VerbosePreference = "Continue";
-}
-
-# If it's Windows PowerShell, we can turn on Verbose output if you're holding shift
-if (("Desktop" -eq $PSVersionTable.PSEdition) -or ($PSVersionTable.PSVersion.Major -ge 7)) {
-    # Check SHIFT state ASAP at startup so I can use that to control verbosity :)
-    Add-Type -Assembly PresentationCore, WindowsBase
-    try {
-        if ([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftShift) -OR
-            [System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::RightShift)) {
-            $VerbosePreference = "Continue"
-        }
-    } catch {
-        # If that didn't work ... oh well.
-    }
-}
+Import-Module -Name 'PSReadline','Configuration','Environment'
+Trace-Message "Imported Dependencies" -Stopwatch $TraceVerboseTimer
 
 Import-Module -FullyQualifiedName @{ ModuleName = "Profile"; ModuleVersion = "1.4.2" } -Verbose:$false
-
-# First call to Trace-Message, pass in our TraceTimer that I created at the top to make sure we time EVERYTHING.
-# This has to happen after the verbose check, obviously
-Trace-Message "Modules Imported" -Stopwatch $TraceVerboseTimer
-
-# I prefer that my sessions start in a predictable location, regardless of elevation, etc.
-if ($psEditor.Workspace.Path) { # in VS Code, start in the workspace!
-    Set-Location $psEditor.Workspace.Path
-}
+Trace-Message "Imported Profile" -Stopwatch $TraceVerboseTimer
 
 Set-InvokeBuildCompleters
+Trace-Message "Build Completers" -Stopwatch $TraceVerboseTimer
+
 Set-DotNetCompleters
+Trace-Message "DotNet Completers" -Stopwatch $TraceVerboseTimer
 
 # Set error message format.
 $global:ErrorView = "ConciseView"
