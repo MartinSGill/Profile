@@ -87,4 +87,10 @@ VerboseBlock "Auto-Completers" {
     Add-AutoCompleters
 }
 
+
+VerboseBlock "Aliases" {
+    Update-ToolPath
+}
+
+
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process

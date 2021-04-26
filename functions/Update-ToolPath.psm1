@@ -38,8 +38,5 @@ function Update-ToolPath {
         New-Alias -Name 'ci' -Value 'code-insiders.cmd' -Scope Global
     }
 
-    Trace-Message "Development aliases set"
-
     $ENV:PATH = Select-UniquePath $folders ${Env:Path}
-    Trace-Message "Env:PATH Updated"
 }
