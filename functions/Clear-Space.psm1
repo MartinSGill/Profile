@@ -28,6 +28,9 @@ Function Clear-Space {
         [Parameter(ParameterSetName = "Individual")]
         [switch]$DockerVhdx,
 
+        [Parameter(ParameterSetName = "Individual")]
+        [switch]$Yarn,
+
         [Parameter(ParameterSetName = "Help")]
         [switch]$Help
     )
@@ -41,6 +44,8 @@ Function Clear-Space {
         Write-Error "Must Run as Administrator."
         return
     }
+
+    Import-Humanizer
 
     $cHeader = "{0}{1}" -f $PSStyle.Foreground.Black, $PSStyle.Background.LightYellow
     $cInfoStart = $PSStyle.Foreground.LightYellow
@@ -139,6 +144,22 @@ Function Clear-Space {
                 dotnet nuget locals all --clear
             }
             Write-Host
+        }
+    }
+
+    if ($All -or $Yarn) {
+        if ($null -eq (Get-Command -ErrorAction SilentlyContinue yarn)) {
+            Write-Warning "yarn not in path. Skipping."
+        } else {
+            if ($null -eq (Get-Command -ErrorAction SilentlyContinue node)) {
+                Write-Warning "node not in path. Skipping."
+            } else {
+                Write-Host "$cText  Yarn$cReset"
+                if ($PSCmdlet.ShouldProcess("Yarn", "Clear Caches")) {
+                    yarn cache clean --emoji true
+                }
+                Write-Host
+            }
         }
     }
 
