@@ -55,6 +55,8 @@ Function Clear-Space {
     $cReset = $PSStyle.Reset
     $cSuccess = $PSStyle.Foreground.LightGreen
 
+    $drives = Get-PhysicalPsDrive | ForEach-Object {  @{ Name = $_.Name ; StartFree = $_.Free }  }
+
     $startFree = (Get-PSDrive c).Free
 
     Write-Host
@@ -196,9 +198,13 @@ Function Clear-Space {
         }
     }
 
+    $drives = $drives | ForEach-Object { $_.EndFree = (Get-PSDrive -Name $_.Name).Free ; $_.Recovered = $_.EndFree - $_.StartFree; $_ } | ForEach-Object { [PSCustomObject]$_ }
+
     Write-Host
-    Write-Host ("≈ $cSuccess{0,-4:n1} {1,-2:s} ${cText}Recovered$cReset" -f $spaceRecovered.LargestWholeNumberValue, $spaceRecovered.LargestWholeNumberSymbol)
-    Write-Host ("  $cName{0,-4:n1} {1,-2:s} ${cText}Free ${cFolder}(was {2:n1} {3})$cReset" -f $endFree.bytes.LargestWholeNumberValue, $endFree.bytes.LargestWholeNumberSymbol, $startFree.bytes.LargestWholeNumberValue, $startFree.bytes.LargestWholeNumberSymbol)
+    $drives | Format-Table -Property    @{ Label = "💾 ${cText}Name$cReset";     Expression = { "💾 ${cText}$($_.Name)$cReset" } },
+                                        @{ Label = "▶ ${cName}Start$cReset";    Expression = { "▶ ${cName}{0,6:n1} {1,-2:s}$cReset" -f $_.StartFree.bytes.LargestWholeNumberValue, $_.StartFree.bytes.LargestWholeNumberSymbol } },
+                                        @{ Label = "🏁 ${cFolder}End$cReset";    Expression = { "🏁 ${cFolder}{0,6:n1} {1,-2:s}$cReset" -f $_.EndFree.bytes.LargestWholeNumberValue, $_.EndFree.bytes.LargestWholeNumberSymbol } },
+                                        @{ Label = "✔ ${cSuccess}Freed$cReset"; Expression = { "✔ ${cSuccess}{0,6:n1} {1,-2:s}$cReset" -f $_.Recovered.bytes.LargestWholeNumberValue, $_.Recovered.bytes.LargestWholeNumberSymbol  }}
     Write-Host
     Write-Host "${cSuccess}Done. Bye. 🙋‍$cReset"
 }
