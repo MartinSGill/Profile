@@ -91,8 +91,4 @@ VerboseBlock "Aliases" {
     Update-ToolPath
 }
 
-VerboseBlock "Humanizer" {
-    Import-Humanizer
-}
-
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
