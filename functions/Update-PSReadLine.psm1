@@ -6,12 +6,12 @@ function Update-PSReadLine {
     #>
     $PSReadLineOption = @{
         AnsiEscapeTimeout             = 100
-        BellStyle                     = "Visual"
+        BellStyle                     = 'Visual'
         CompletionQueryItems          = 100
-        ContinuationPrompt            = ">> "
+        ContinuationPrompt            = '>> '
         DingDuration                  = 50 #ms
         DingTone                      = 1221
-        EditMode                      = "Windows"
+        EditMode                      = 'Windows'
         HistoryNoDuplicates           = $true
         HistorySaveStyle              = "SaveIncrementally"
         HistorySearchCaseSensitive    = $false
@@ -20,7 +20,8 @@ function Update-PSReadLine {
         MaximumKillRingCount          = 10
         ShowToolTips                  = $true
         WordDelimiters                = ";:,.[]{}()/\|^&*-=+"
-        PredictionSource              = 'History'
+        PredictionSource              = 'HistoryAndPlugin'
+        PredictionViewStyle           = 'ListView'
     }
 
     Set-PSReadlineOption @PSReadLineOption
@@ -28,8 +29,6 @@ function Update-PSReadLine {
     Set-PSReadlineKeyHandler Ctrl+Shift+R ForwardSearchHistory
     Set-PSReadlineKeyHandler Ctrl+R ReverseSearchHistory
 
-    Set-PSReadlineKeyHandler DownArrow HistorySearchForward
-    Set-PSReadlineKeyHandler UpArrow HistorySearchBackward
     Set-PSReadLineKeyHandler Ctrl+Home BeginningOfHistory
 
     Set-PSReadlineKeyHandler Ctrl+M SetMark
