@@ -19,6 +19,8 @@ Mandatory:
 ```powershell
 Install-Module Terminal-Icons
 Install-Module oh-my-posh
+Install-Module Environment
+Install-Module Configuration
 ```
 
 ## Install
