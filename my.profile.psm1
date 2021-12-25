@@ -77,6 +77,11 @@ VerboseBlock "Colors / Formatting" {
         Update-PSReadLine
     }
 
+    VerboseBlock "Posh-Git" {
+        Import-Module posh-git
+        $env:POSH_GIT_ENABLED = $true
+    }
+
     VerboseBlock "Oh-My-Posh" {
         Import-Module oh-my-posh
         Set-PoshPrompt -Theme (Join-Path $PSScriptRoot 'themes' -AdditionalChildPath 'mytheme.omp.json')

@@ -1,12 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh3/main/themes/schema.json",
-  "blocks": [
-    {
+  "console_title": true,
+  "console_title_style": "folder",
+  "blocks": [{
       "type": "prompt",
       "alignment": "left",
-      "segments": [
-        {
+      "segments": [{
           "type": "session",
+          "properties": {
+            "display_host": false
+          },
           "style": "powerline",
           "powerline_symbol": "\uE0B0",
           "foreground": "#100e23",
@@ -14,10 +17,25 @@
         },
         {
           "type": "git",
+          "properties": {
+            "display_status_detail": true,
+            "display_status": true,
+            "display_upstream_icon": true
+          },
           "style": "powerline",
           "powerline_symbol": "\uE0B0",
           "foreground": "#193549",
           "background": "#95ffa4"
+        },
+        {
+          "type": "angular",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#a70000",
+          "background": "#ffffff",
+          "properties": {
+            "prefix": " \uE753 "
+          }
         },
         {
           "type": "node",
@@ -38,28 +56,27 @@
           "properties": {
             "prefix": " \uE77F "
           }
-        },
-        {
-          "type": "kubectl",
-          "style": "powerline",
-          "powerline_symbol": "\uE0B0",
-          "foreground": "#ffffff",
-          "background": "#3371e3",
-          "properties": {
-            "prefix": " \uF1B3  "
-          }
-        },
-        {
-          "type": "terraform",
-          "style": "powerline",
-          "powerline_symbol": "\uE0B0",
-          "foreground": "#ffffff",
-          "background": "#3c2aa8",
-          "properties": {
-            "prefix": " \uF6E6 "
-          }
         }
       ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [{
+        "type": "exit",
+        "style": "diamond",
+        "foreground": "#ffffff",
+        "background": "#2e9599",
+        "leading_diamond": "",
+        "trailing_diamond": "\uE0B4",
+        "properties": {
+          "display_exit_code": false,
+          "always_enabled": true,
+          "error_color": "#f1184c",
+          "color_background": true,
+          "prefix": "<transparent>\uE0B0</> \uE23A"
+        }
+      }]
     },
     {
       "type": "newline"
@@ -67,18 +84,26 @@
     {
       "type": "prompt",
       "alignment": "left",
-      "segments": [
+      "segments": [{
+          "type": "az",
+          "style": "powerline",
+          "foreground": "#ffffff",
+          "background": "#3700ff",
+          "properties": {
+            "prefix": " \uFD03 "
+          }
+        },
         {
           "type": "path",
           "style": "powerline",
           "powerline_symbol": "\uE0B0",
           "foreground": "#100e23",
           "background": "#91ddff",
-          "properties" : {
-              "home_icon": "\uF7DB",
-              "folder_icon": "\uF115",
-              "folder_separator_icon": " \uE0B1 ",
-              "style": "agnoster_short"
+          "properties": {
+            "home_icon": "\uF7DB",
+            "folder_icon": "\uF115",
+            "folder_separator_icon": " \uE0B1 ",
+            "style": "agnoster_short"
           }
         },
         {
@@ -92,26 +117,11 @@
           }
         },
         {
-            "type": "root",
-            "style": "powerline",
-            "powerline_symbol": "\uE0B0",
-            "foreground": "#193549",
-            "background": "#ffff66"
-        },
-        {
-          "type": "exit",
-          "style": "diamond",
-          "foreground": "#ffffff",
-          "background": "#2e9599",
-          "leading_diamond": "",
-          "trailing_diamond": "\uE0B4",
-          "properties": {
-            "display_exit_code": false,
-            "always_enabled": true,
-            "error_color": "#f1184c",
-            "color_background": true,
-            "prefix": "<transparent>\uE0B0</> \uE23A"
-          }
+          "type": "root",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#193549",
+          "background": "#ffff66"
         }
       ]
     }
