@@ -1,6 +1,5 @@
 
-$env:ProfileDebugMode = $true
-$InformationPreference = "Continue"
+$env:MyProfileDebugMode = $true
 Import-Module $PWD/MyProfile.psm1
 
 if (-not (Test-Path ~/.config/.postCreateComplete)) {
