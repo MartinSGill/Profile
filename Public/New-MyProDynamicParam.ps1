@@ -1,4 +1,4 @@
-Function script:New-DynamicParam {
+Function script:New-MyProDynamicParam {
     <#
         .SYNOPSIS
             Helper function to simplify creating dynamic parameters
@@ -13,7 +13,7 @@ Function script:New-DynamicParam {
                One of the examples illustrates a generic method for populating appropriate variables from dynamic parameters
                Alternatively, manually reference $PSBoundParameters for the dynamic parameter value
         .NOTES
-            Sourece: https://github.com/RamblingCookieMonster/PowerShell/blob/master/New-DynamicParam.ps1
+            Source: https://github.com/RamblingCookieMonster/PowerShell/blob/master/New-MyProDynamicParam.ps1
             Credit to http://jrich523.wordpress.com/2013/05/30/powershell-simple-way-to-add-dynamic-parameters-to-advanced-function/
                 Added logic to make option set optional
                 Added logic to add RuntimeDefinedParameter to existing DPDictionary
@@ -50,7 +50,7 @@ Function script:New-DynamicParam {
                 Param()
                 DynamicParam {
                     $options = @( gwmi win32_volume | %{$_.driveletter} | sort )
-                    New-DynamicParam -Name Drive -ValidateSet $options -Position 0 -Mandatory
+                    New-MyProDynamicParam -Name Drive -ValidateSet $options -Position 0 -Mandatory
                 }
                 begin{
                     #have to manually populate
@@ -62,7 +62,7 @@ Function script:New-DynamicParam {
                 }
             } #Show-Free
             Show-Free -Drive <tab>
-        # This example illustrates the use of New-DynamicParam to create a single dynamic parameter
+        # This example illustrates the use of New-MyProDynamicParam to create a single dynamic parameter
         # The Drive parameter ValidateSet populates with all available volumes on the computer for handy tab completion / intellisense
         .EXAMPLE
         # I found many cases where I needed to add more than one dynamic parameter
@@ -78,19 +78,19 @@ Function script:New-DynamicParam {
                     #Create the RuntimeDefinedParameterDictionary
                     $Dictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
 
-                    New-DynamicParam -Name AlwaysParam -ValidateSet @( gwmi win32_volume | %{$_.driveletter} | sort ) -DPDictionary $Dictionary
+                    New-MyProDynamicParam -Name AlwaysParam -ValidateSet @( gwmi win32_volume | %{$_.driveletter} | sort ) -DPDictionary $Dictionary
                     #Add dynamic parameters to $dictionary
                     if($x -eq 1)
                     {
-                        New-DynamicParam -Name X1Param1 -ValidateSet 1,2 -mandatory -DPDictionary $Dictionary
-                        New-DynamicParam -Name X1Param2 -DPDictionary $Dictionary
-                        New-DynamicParam -Name X3Param3 -DPDictionary $Dictionary -Type DateTime
+                        New-MyProDynamicParam -Name X1Param1 -ValidateSet 1,2 -mandatory -DPDictionary $Dictionary
+                        New-MyProDynamicParam -Name X1Param2 -DPDictionary $Dictionary
+                        New-MyProDynamicParam -Name X3Param3 -DPDictionary $Dictionary -Type DateTime
                     }
                     else
                     {
-                        New-DynamicParam -Name OtherParam1 -Mandatory -DPDictionary $Dictionary
-                        New-DynamicParam -Name OtherParam2 -DPDictionary $Dictionary
-                        New-DynamicParam -Name OtherParam3 -DPDictionary $Dictionary -Type DateTime
+                        New-MyProDynamicParam -Name OtherParam1 -Mandatory -DPDictionary $Dictionary
+                        New-MyProDynamicParam -Name OtherParam2 -DPDictionary $Dictionary
+                        New-MyProDynamicParam -Name OtherParam3 -DPDictionary $Dictionary -Type DateTime
                     }
 
                     #return RuntimeDefinedParameterDictionary
@@ -115,9 +115,9 @@ Function script:New-DynamicParam {
                         Get-Variable -scope 0
                 }
             }
-        # This example illustrates the creation of many dynamic parameters using New-DynamicParam
+        # This example illustrates the creation of many dynamic parameters using New-MyProDynamicParam
             # You must create a RuntimeDefinedParameterDictionary object ($dictionary here)
-            # To each New-DynamicParam call, add the -DPDictionary parameter pointing to this RuntimeDefinedParameterDictionary
+            # To each New-MyProDynamicParam call, add the -DPDictionary parameter pointing to this RuntimeDefinedParameterDictionary
             # At the end of the DynamicParam block, return the RuntimeDefinedParameterDictionary
             # Initialize all bound parameters using the provided block or similar code
         .FUNCTIONALITY

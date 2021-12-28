@@ -33,7 +33,7 @@ function script:Set-DockerHost {
                 $options = $hosts.Keys
             } catch {}
         }
-        New-DynamicParam -Name Name -ValidateSet $options -Mandatory -DpDictionary $dictionary
+        New-MyProDynamicParam -Name Name -ValidateSet $options -Mandatory -DpDictionary $dictionary
         return $dictionary
     }
 

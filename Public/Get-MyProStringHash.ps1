@@ -1,4 +1,4 @@
-function script:Get-StringHash {
+function script:Get-MyProStringHash {
     <#
         .Synopsis
             Get a hash/checksum for a string.

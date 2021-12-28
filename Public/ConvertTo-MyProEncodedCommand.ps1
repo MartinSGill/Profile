@@ -1,4 +1,4 @@
-function script:Get-EncodedCommand {
+function script:ConvertTo-MyProEncodedCommand {
     <#
         .Description
             Encode a command, as required by pwsh -EncodedCommand
@@ -12,11 +12,11 @@ function script:Get-EncodedCommand {
                     ValueFromPipelineByPropertyName=$true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        # String to encode.
+        # Command (string) to encode.
         $Command
     )
     process {
-        $bytes = [System.Text.Encoding]::Unicode.GetBytes($command)
+        $bytes = [System.Text.Encoding]::Unicode.GetBytes($Command)
         $encodedCommand = [Convert]::ToBase64String($bytes)
         $encodedCommand
     }

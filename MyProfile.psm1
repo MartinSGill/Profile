@@ -155,7 +155,7 @@ VerboseBlock "Colors / Formatting" {
 
     VerboseBlock "Oh-My-Posh" {
         Import-Module oh-my-posh
-        Set-PoshPrompt -Theme (Join-Path $PSScriptRoot 'themes' -AdditionalChildPath 'mytheme.omp.json')
+        Set-PoshPrompt -Theme night-owl
     }
 }
 

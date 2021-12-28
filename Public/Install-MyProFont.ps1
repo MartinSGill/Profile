@@ -1,13 +1,19 @@
 
-function script:Install-Font {
+function script:Install-MyProFont {
     <#
     .Synopsis
         Install a font file. (otf, ttf)
     #>
+    [CmdLetBinding(SupportsShouldProcess)]
     param (
         [Parameter(Mandatory = $true)]
-        [string]$FontFile
+        [string]$Path
     )
+
+    if (-not $IsWindows) {
+        Write-Error "Only supported on Windows."
+        return
+    }
 
     if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
         Write-Error "Must Run as Administrator."
@@ -15,8 +21,8 @@ function script:Install-Font {
     }
 
     try {
-        $font = $fontFile | split-path -Leaf
-        If (!(Test-Path "c:\windows\fonts\$($font)")) {
+        $font = $Path | split-path -Leaf
+        If (!(Test-Path "$env:SYSTEMROOT\fonts\$($font)")) {
             switch (($font -split "\.")[-1]) {
                 "TTF" {
                     $fn = "$(($font -split "\.")[0]) (TrueType)"
@@ -27,8 +33,8 @@ function script:Install-Font {
                     break
                 }
             }
-            Copy-Item -Path $fontFile -Destination "C:\Windows\Fonts\$font" -Force
-            New-ItemProperty -Name $fn -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts" -PropertyType string -Value $font
+            Copy-Item -Path $Path -Destination "C:\Windows\Fonts\$font" -Force -WhatIf:$WhatIf
+            New-ItemProperty -Name $fn -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts" -PropertyType string -Value $font -WhatIf:$WhatIf
         }
     }
     catch {
