@@ -1,5 +1,5 @@
 
-function Install-Font {
+function script:Install-Font {
     <#
     .Synopsis
         Install a font file. (otf, ttf)

@@ -1,4 +1,4 @@
-Function Clear-Space {
+function script:Clear-Space {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param (
         [Parameter(ParameterSetName = "All")]

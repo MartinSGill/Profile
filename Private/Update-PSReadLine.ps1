@@ -1,5 +1,5 @@
 
-function Update-PSReadLine {
+function script:Update-PSReadLine {
     <#
         .Synopsis
             Preferred PSReadline Settings.

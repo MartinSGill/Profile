@@ -1,4 +1,4 @@
-function Add-DevShell {
+function script:Add-DevShell {
     <#
         .Synopsis
             Add Visual Studio Developer Powershell Prompt functionality to the

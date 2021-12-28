@@ -5,7 +5,7 @@
 .NOTES
 
 #>
-function Set-DotNetCompleters {
+function script:Set-DotNetCompleters {
     [CmdletBinding(PositionalBinding=$false)]
     Param (
     )

@@ -1,4 +1,4 @@
-﻿function Format-Quote {
+﻿function script:Format-Quote {
     <#
         .Synopsis
             Pretty print a quote.

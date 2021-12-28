@@ -1,4 +1,4 @@
-Function New-DynamicParam {
+Function script:New-DynamicParam {
     <#
         .SYNOPSIS
             Helper function to simplify creating dynamic parameters

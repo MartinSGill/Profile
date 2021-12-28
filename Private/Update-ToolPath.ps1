@@ -1,4 +1,4 @@
-function Update-ToolPath {
+function script:Update-ToolPath {
     <#
         .Synopsis
             Add useful things to the PATH which aren't normally there on Windows.

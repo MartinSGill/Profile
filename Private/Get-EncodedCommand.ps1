@@ -1,4 +1,4 @@
-function Get-EncodedCommand {
+function script:Get-EncodedCommand {
     <#
         .Description
             Encode a command, as required by pwsh -EncodedCommand

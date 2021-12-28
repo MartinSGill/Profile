@@ -1,5 +1,5 @@
 
-function Get-ParentProcessId {
+function script:Get-ParentProcessId {
     <#
         .Synopsis
             Get the Process Id of the current process' parent.

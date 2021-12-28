@@ -1,5 +1,5 @@
 
-function Get-Quote {
+function script:Get-Quote {
     [CmdletBinding()][Alias("gq")]
     param(
         [Parameter(ValueFromRemainingArguments=$true)]

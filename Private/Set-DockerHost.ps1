@@ -15,7 +15,7 @@
     }
 
 #>
-function Set-DockerHost {
+function script:Set-DockerHost {
     [CmdletBinding(PositionalBinding=$false)]
     Param (
         # Path to an alternate config file.

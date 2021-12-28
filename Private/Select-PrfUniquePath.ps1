@@ -1,6 +1,6 @@
 # Copied from Environment Module ((c) 2016,2018 Joel Bennett. All rights reserved. MIT License)
 
-function Select-PrfUniquePath {
+function script:Select-PrfUniquePath {
     [CmdletBinding()]
     param(
         # If non-full, split path by the delimiter. Defaults to '[IO.Path]::PathSeparator' so you can use this on $Env:Path

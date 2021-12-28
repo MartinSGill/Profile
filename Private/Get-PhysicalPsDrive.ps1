@@ -1,4 +1,4 @@
-function Get-PhysicalPsDrive {
+function script:Get-PhysicalPsDrive {
     [CmdletBinding()]
     param ()
 

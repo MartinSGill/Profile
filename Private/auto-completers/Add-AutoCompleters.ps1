@@ -1,5 +1,5 @@
 
-function Add-AutoCompleters {
+function script:Add-AutoCompleters {
 
     #########
     ## DOCKER

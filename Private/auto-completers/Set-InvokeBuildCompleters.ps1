@@ -31,7 +31,7 @@
 	e.g. in a profile.
 #>
 
-function Set-InvokeBuildCompleters {
+function script:Set-InvokeBuildCompleters {
     [CmdletBinding()] param()
 
     if (@(Get-Command -Name Invoke-Build -ErrorAction SilentlyContinue).Length -gt 0) {

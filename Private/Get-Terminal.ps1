@@ -1,4 +1,4 @@
-function Get-Terminal {
+function script:Get-Terminal {
     [CmdletBinding()]
     param ()
 

@@ -1,4 +1,4 @@
-function Reset-Module {
+function script:Reset-Module {
     <#
     .Synopsis
         Remove and re-import a module to force a full reload
