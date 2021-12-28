@@ -3,9 +3,9 @@
 
 # Detect Shift Key
 if (("Desktop" -eq $PSVersionTable.PSEdition) -or ($PSVersionTable.PSVersion.Major -ge 7)) {
-    # Check SHIFT state ASAP at startup so I can use that to control verbosity :)
-    Add-Type -Assembly PresentationCore, WindowsBase
     try {
+        # Check SHIFT state ASAP at startup so I can use that to control verbosity :)
+        Add-Type -Assembly PresentationCore, WindowsBase
         if ([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftShift) -OR
             [System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::RightShift)) {
             $ProfileDebugMode = "true"
@@ -16,12 +16,21 @@ if (("Desktop" -eq $PSVersionTable.PSEdition) -or ($PSVersionTable.PSVersion.Maj
 }
 
 $isPwsh72 = $PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 2
+$moduleNamespace = "PRF"
+$prefix = "${moduleNamespace}: "
 
 if ($env:ProfileDebugMode) {
     $ProfileDebugMode = "true"
 }
 
 $script:VerboseDepth = 0
+
+Function Write-PrfDebug ($Message) {
+    if ($ProfileDebugMode) {
+        Write-Host "${prefix}$($PSStyle.Foreground.LightBlue)DEBUG$($PSStyle.Foreground.White): $Message"
+    }
+}
+
 Function VerboseBlock {
     param(
         [Parameter(Mandatory=$true)]
@@ -33,24 +42,44 @@ Function VerboseBlock {
     $space = "  " * $script:VerboseDepth++
 
     if ($ProfileDebugMode) {
-        Write-Host "$($PSStyle.Foreground.LightBlue)DEBUG$($PSStyle.Foreground.White): $space$($PSStyle.Foreground.LightCyan)省$($PSStyle.Foreground.Cyan)'$($PSStyle.Foreground.LightYellow)$Name$($PSStyle.Foreground.Cyan)'$($PSStyle.Reset)"
+        Write-PrfDebug "$space$($PSStyle.Foreground.LightCyan)📖$($PSStyle.Foreground.Cyan)'$($PSStyle.Foreground.LightYellow)$Name$($PSStyle.Foreground.Cyan)'$($PSStyle.Reset)"
     }
 
     $Scriptblock.Invoke()
 
     if ($ProfileDebugMode) {
-        Write-Host "$($PSStyle.Foreground.LightBlue)DEBUG$($PSStyle.Foreground.White): $space$($PSStyle.Foreground.LightGreen) $($PSStyle.Foreground.Cyan)'$($PSStyle.Foreground.LightYellow)$Name$($PSStyle.Foreground.Cyan)'$($PSStyle.Reset)"
+        Write-PrfDebug "$space$($PSStyle.Foreground.LightGreen)📕$($PSStyle.Foreground.Cyan)'$($PSStyle.Foreground.LightYellow)$Name$($PSStyle.Foreground.Cyan)'$($PSStyle.Reset)"
     }
 
     $script:VerboseDepth--
 }
 
 ## Load Functions
+$requiredModules = @(
+    @{ Name = "PSReadline"; MinimumVersion = "2.2.0" }
+    @{ Name = "Terminal-Icons" }
+    @{ Name = "posh-git" }
+    @{ Name = "oh-my-posh" }
+)
+
+VerboseBlock "Checking Modules" {
+    $requiredModules | ForEach-Object {
+        $_.Found = (Get-Module $_.Name -ListAvailable | Select-Object -First 1).Version
+
+        Write-PrfDebug "    🔎 $($_.Name) $($_.MinimumVersion) 🎯 $($_.Found)"
+
+        if ($null -eq $_.Found) {
+            Write-Warning "${prefix}Missing module $($_.Name)"
+        } elseif ($null -ne $_.MinimumVersion -and [Version]::new($_.MinimumVersion) -lt $_.Found) {
+            Write-Warning "${prefix}Expected module $($_.Name) to >= $($_.MinimumVersion). Found $($_.Found)"
+        }
+    }
+}
 
 VerboseBlock "Functions" {
     @("Humanizer", "Types", "functions", "auto-completers") | ForEach-Object {
         Get-ChildItem -Path (Join-Path $PSScriptRoot $_) -Filter "*.psm1" | ForEach-Object {
-            Write-Verbose "Sourcing: '$_'"
+            Write-Verbose "${prefix}Sourcing: '$_.Name'"
             Import-Module $_
         }
     }
@@ -96,4 +125,6 @@ VerboseBlock "Aliases" {
     Update-ToolPath
 }
 
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+if ($PSVersionTable.Platform -eq "Windows") {
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+}

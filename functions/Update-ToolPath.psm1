@@ -9,9 +9,6 @@ function Update-ToolPath {
     #>
     param()
 
-    ## I add my "Scripts" directory and all of its direct subfolders to my PATH
-    [string[]]$folders = Get-ChildItem $ProfileDir\Tool[s], $ProfileDir\Utilitie[s], $ProfileDir\Script[s]\*, $ProfileDir\Script[s] -ad | % FullName
-
     if (Get-Command docker -ErrorAction SilentlyContinue) {
         New-Alias -Name 'd' -Value docker -Scope Global
         Import-Module DockerCompletion
@@ -37,6 +34,4 @@ function Update-ToolPath {
     if (Get-Command -Name 'code-insiders.cmd' -ErrorAction SilentlyContinue) {
         New-Alias -Name 'ci' -Value 'code-insiders.cmd' -Scope Global
     }
-
-    $ENV:PATH = Select-UniquePath $folders ${Env:Path}
 }

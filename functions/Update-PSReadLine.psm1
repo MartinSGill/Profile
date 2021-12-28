@@ -20,8 +20,8 @@ function Update-PSReadLine {
         MaximumKillRingCount          = 10
         ShowToolTips                  = $true
         WordDelimiters                = ";:,.[]{}()/\|^&*-=+"
-        PredictionSource              = 'HistoryAndPlugin'
         PredictionViewStyle           = 'ListView'
+        PredictionSource              = 'HistoryAndPlugin'
     }
 
     Set-PSReadlineOption @PSReadLineOption
@@ -40,8 +40,6 @@ function Update-PSReadLine {
     Set-PSReadLineKeyHandler Ctrl+h BackwardDeleteWord
     Set-PSReadLineKeyHandler Ctrl+Enter AddLine
     Set-PSReadLineKeyHandler Ctrl+Shift+Enter AcceptAndGetNext
-    Trace-Message "PSReadLine hotkeys fixed"
-
     Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
     # Sometimes you enter a command but realize you forgot to do something else first.
