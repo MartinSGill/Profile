@@ -13,3 +13,5 @@ Install-Module PSReadline -Scope CurrentUser -AllowPrerelease -Force
 Install-Module oh-my-posh
 Install-Module posh-git
 Install-Module Terminal-Icons
+
+Set-Content ~/.config/.postCreateComplete -Value ""

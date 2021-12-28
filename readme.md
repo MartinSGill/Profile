@@ -33,18 +33,18 @@ git clone ...
 # Step into this repo
 Set-Location ./Profile
 # Ensure powershell profile folder exists
-mkdir -Force ~/Documents/Powershell
+New-Item -ItemType Directory -Force (Split-Path $PROFILE.CurrentUserCurrentHost -Parent)
 # Add import statement to profile
-Add-Content -Path ~/Documents/Powershell/profile.ps1 -Value "Import-Module '$PWD/my.profile.psm1'"
+Add-Content -Path $PROFILE.CurrentUserAllHosts -Value "Import-Module '$PWD/MyProfile.psm1'"
 ```
 
 Humanizer is no longer loaded by default, mostly because it can cause issues in
-some environments. Load it with `PS> Import-Humanizer`
+some environments. Load it with `PS> Import-MyProHumanizer`
 
 ## Troubleshooting
 
 On Windows you can hold the "shift" key while starting the profile to enable
 debug output.
 
-Alternatively you can set `$env:ProfileDebugMode` before attempting to import
+Alternatively you can set `$env:MyProfileDebugMode` before attempting to import
 the profile to enable debug output.

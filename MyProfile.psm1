@@ -16,7 +16,7 @@ if (("Desktop" -eq $PSVersionTable.PSEdition) -or ($PSVersionTable.PSVersion.Maj
     }
 }
 
-if ($env:ProfileDebugMode) {
+if ($env:MyProfileDebugMode) {
     $ProfileDebugMode = "true"
 }
 
