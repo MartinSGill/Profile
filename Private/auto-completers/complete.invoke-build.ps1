@@ -1,5 +1,5 @@
 if (Test-MyProCommand "Invoke-Build") {
-    Write-PrfDebug "Found 'invoke-build', registering completer."
+    Write-MyProDebug "Found 'invoke-build', registering completer."
 
     Register-ArgumentCompleter -CommandName Invoke-Build.ps1 -ParameterName Task -ScriptBlock {
         param($commandName, $parameterName, $wordToComplete, $commandAst, $boundParameters)

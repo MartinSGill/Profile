@@ -1,5 +1,5 @@
 if (Test-MyProCommand dotnet) {
-    Write-PrfDebug "Found 'dotnet', registering completer."
+    Write-MyProDebug "Found 'dotnet', registering completer."
 
     Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
         param($commandName, $wordToComplete, $cursorPosition)

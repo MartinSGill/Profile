@@ -1,4 +1,4 @@
-function script:Import-Humanizer {
+function script:Import-MyProHumanizer {
     <#
     .SYNOPSIS
         Import Humanizer formats and type updates.

@@ -30,27 +30,25 @@ $messagePrefix = "$($PSStyle.Foreground.BrightBlack)${moduleNamespace}$($PSStyle
 ########
 # Critical Functions
 ########
-function Write-PrfDebug ($Message) {
+function Write-MyProDebug ($Message) {
     if ($ProfileDebugMode) {
-        if ($script:VerboseDepth -gt 0) {
-            $space = "  " * $script:VerboseDepth
-        }
+        $space = "  " * $script:VerboseDepth
         Write-Information "${messagePrefix}$($PSStyle.Foreground.Cyan)DEBUG$($PSStyle.Reset): ${space}${Message}" -Tags @('MyPro', 'Debug') -InformationAction "Continue"
     }
 }
 
-function Write-PrfError ($Message) {
+function Write-MyProError ($Message) {
     Write-Error "${messagePrefix}${Message}"
 }
 
-function Write-PrfWarning ($Message) {
+function Write-MyProWarning ($Message) {
     Write-Warning "${messagePrefix}${Message}"
 }
 
 if ($ProfileDebugMode) {
-    Write-PrfDebug "Debug Message"
-    Write-PrfWarning "Warning Message"
-    Write-PrfError "Error Message"
+    Write-MyProDebug "Debug Message"
+    Write-MyProWarning "Warning Message"
+    Write-MyProError "Error Message"
 }
 
 $script:VerboseDepth = 0
@@ -62,10 +60,8 @@ Function VerboseBlock {
         [scriptblock]$Scriptblock
     )
 
-    $script:VerboseDepth++
-
     if ($ProfileDebugMode) {
-        Write-PrfDebug "🔽 '$($PSStyle.Foreground.BrightYellow)$Name$($PSStyle.Reset)'"
+        Write-MyProDebug "🔽 '$($PSStyle.Foreground.BrightYellow)$Name$($PSStyle.Reset)'"
     }
 
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
@@ -77,10 +73,8 @@ Function VerboseBlock {
     $sw.Stop
 
     if ($ProfileDebugMode) {
-        Write-PrfDebug "🔼 '$($PSStyle.Foreground.BrightYellow)$Name$($PSStyle.Reset)' $($sw.ElapsedMilliseconds)ms"
+        Write-MyProDebug "🔼 '$($PSStyle.Foreground.BrightYellow)$Name$($PSStyle.Reset)' $($sw.ElapsedMilliseconds)ms"
     }
-
-    $script:VerboseDepth--
 }
 
 ########
@@ -99,7 +93,7 @@ VerboseBlock "Checking Modules" {
     $requiredModules | ForEach-Object {
         $_.Found = (Get-Module $_.Name -ListAvailable | Select-Object -First 1).Version
 
-        Write-PrfDebug "    🔎 $($_.Name) $($_.MinimumVersion) 🎯 $($_.Found)"
+        Write-MyProDebug "    🔎 $($_.Name) $($_.MinimumVersion) 🎯 $($_.Found)"
 
         if ($null -eq $_.Found) {
             $abort = $true
@@ -123,7 +117,7 @@ VerboseBlock "Functions" {
     {
         try
         {
-            Write-PrfDebug "Importing $($import.BaseName)"
+            Write-MyProDebug "Importing $($import.BaseName)"
             . $import.FullName
         }
         catch
@@ -170,7 +164,7 @@ VerboseBlock "Auto-Completers" {
     foreach ($item in $autoCompleters) {
         try
         {
-            Write-PrfDebug "Sourcing Completer: $($item.BaseName)"
+            Write-MyProDebug "Sourcing Completer: $($item.BaseName)"
             . $item.FullName
         }
         catch
@@ -186,7 +180,7 @@ VerboseBlock "Aliases" {
 
 VerboseBlock "Exports" {
     foreach ($item in $publicFunctions) {
-        Write-PrfDebug "Exporting $($item.BaseName)"
+        Write-MyProDebug "Exporting $($item.BaseName)"
         Export-ModuleMember -Function $item.BaseName
     }
 
@@ -194,4 +188,9 @@ VerboseBlock "Exports" {
 
 if ($PSVersionTable.Platform -eq "Windows") {
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+}
+
+if ($null -eq $env:TERM) {
+    Write-MyProDebug "TERM not set, setting to 'xterm'"
+    $env:TERM = 'xterm'
 }

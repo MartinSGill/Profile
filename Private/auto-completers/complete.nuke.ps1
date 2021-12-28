@@ -1,6 +1,6 @@
 
 if (Test-MyProCommand nuke) {
-    Write-PrfDebug "Found 'nuke', registering completer."
+    Write-MyProDebug "Found 'nuke', registering completer."
     Register-ArgumentCompleter -Native -CommandName nuke -ScriptBlock {
         param($commandName, $wordToComplete, $cursorPosition)
             nuke :complete "$wordToComplete" | ForEach-Object {
