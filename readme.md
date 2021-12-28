@@ -9,8 +9,8 @@ your own profile.
 ## Recent Changes
 
 * Simplified to improve load times.
-* Recommended for 7.2-preview, but works with 7.1.
-* Not tested extensively with 5.0.
+* Recommended for 7.2
+* Not recommended for Windows Powershell (v5.x)
 
 ## Dependencies
 
