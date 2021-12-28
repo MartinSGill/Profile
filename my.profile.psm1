@@ -25,23 +25,32 @@ if ($env:ProfileDebugMode) {
 ########
 $isPwsh72 = $PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 2
 $moduleNamespace = "MyPro"
-$messagePrefix = "$($PSStyle.Foreground.Blue)${moduleNamespace}$($PSStyle.Reset): "
+$messagePrefix = "$($PSStyle.Foreground.BrightBlack)${moduleNamespace}$($PSStyle.Reset): "
 
 ########
 # Critical Functions
 ########
-Function Write-PrfDebug ($Message) {
+function Write-PrfDebug ($Message) {
     if ($ProfileDebugMode) {
-        Write-Host "${messagePrefix}$($PSStyle.Foreground.Cyan)DEBUG$($PSStyle.Reset): ${Message}"
+        if ($script:VerboseDepth -gt 0) {
+            $space = "  " * $script:VerboseDepth
+        }
+        Write-Information "${messagePrefix}$($PSStyle.Foreground.Cyan)DEBUG$($PSStyle.Reset): ${space}${Message}" -Tags @('MyPro', 'Debug') -InformationAction "Continue"
     }
 }
 
-Function Write-PrfError ($Message) {
+function Write-PrfError ($Message) {
     Write-Error "${messagePrefix}${Message}"
 }
 
 function Write-PrfWarning ($Message) {
     Write-Warning "${messagePrefix}${Message}"
+}
+
+if ($ProfileDebugMode) {
+    Write-PrfDebug "Debug Message"
+    Write-PrfWarning "Warning Message"
+    Write-PrfError "Error Message"
 }
 
 $script:VerboseDepth = 0
@@ -53,16 +62,22 @@ Function VerboseBlock {
         [scriptblock]$Scriptblock
     )
 
-    $space = "  " * $script:VerboseDepth++
+    $script:VerboseDepth++
 
     if ($ProfileDebugMode) {
-        Write-PrfDebug "$space$($PSStyle.Foreground.LightCyan)📖$($PSStyle.Foreground.Cyan)'$($PSStyle.Foreground.LightYellow)$Name$($PSStyle.Foreground.Cyan)'$($PSStyle.Reset)"
+        Write-PrfDebug "🔽 '$($PSStyle.Foreground.BrightYellow)$Name$($PSStyle.Reset)'"
     }
+
+    $sw = [System.Diagnostics.Stopwatch]::StartNew()
+    $script:VerboseDepth++
 
     $Scriptblock.Invoke()
 
+    $script:VerboseDepth--
+    $sw.Stop
+
     if ($ProfileDebugMode) {
-        Write-PrfDebug "$space$($PSStyle.Foreground.LightGreen)📕$($PSStyle.Foreground.Cyan)'$($PSStyle.Foreground.LightYellow)$Name$($PSStyle.Foreground.Cyan)'$($PSStyle.Reset)"
+        Write-PrfDebug "🔼 '$($PSStyle.Foreground.BrightYellow)$Name$($PSStyle.Reset)' $($sw.ElapsedMilliseconds)ms"
     }
 
     $script:VerboseDepth--
@@ -102,7 +117,7 @@ if ($abort) {
 
 VerboseBlock "Functions" {
     $script:publicFunctions =  @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse -ErrorAction SilentlyContinue )
-    $privateFunctions =  @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+    $privateFunctions =  @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
 
     foreach($import in @($publicFunctions + $privateFunctions))
     {
@@ -151,7 +166,18 @@ VerboseBlock "Colors / Formatting" {
 }
 
 VerboseBlock "Auto-Completers" {
-    Add-AutoCompleters
+    $autoCompleters =  @( Get-ChildItem -Path $PSScriptRoot\Private\auto-completers\*.ps1 -ErrorAction SilentlyContinue )
+    foreach ($item in $autoCompleters) {
+        try
+        {
+            Write-PrfDebug "Sourcing Completer: $($item.BaseName)"
+            . $item.FullName
+        }
+        catch
+        {
+            Write-Error -Message "Failed to import function $($import.FullName): $_"
+        }
+    }
 }
 
 VerboseBlock "Aliases" {
