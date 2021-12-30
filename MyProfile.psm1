@@ -1,5 +1,6 @@
 
 $moduleSw = [System.Diagnostics.Stopwatch]::StartNew()
+$script:timers = @()
 ########
 # Debug Mode
 ########
@@ -49,6 +50,7 @@ if ($ProfileDebugMode) {
 }
 
 $script:VerboseDepth = 0
+$script:VerboseBlockName = [System.Collections.Stack]::new()
 Function VerboseBlock {
     param(
         [Parameter(Mandatory=$true)]
@@ -63,11 +65,17 @@ Function VerboseBlock {
 
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
     $script:VerboseDepth++
+    $script:VerboseBlockName.Push($Name)
 
     $Scriptblock.Invoke()
 
-    $script:VerboseDepth--
     $sw.Stop
+    $nameArray = $script:VerboseBlockName.ToArray()
+    [array]::Reverse($nameArray)
+    $fullName = [string]::Join( "  ", $nameArray)
+    $script:timers += [PSCustomObject]@{ Name = $fullName; Timer = $sw.ElapsedMilliseconds }
+    $null = $script:VerboseBlockName.Pop()
+    $script:VerboseDepth--
 
     if ($ProfileDebugMode) {
         Write-MyProDebug "🔼 '$($PSStyle.Foreground.BrightYellow)$Name$($PSStyle.Reset)' $($sw.ElapsedMilliseconds)ms"
@@ -140,4 +148,11 @@ VerboseBlock "Config Blocks" {
 }
 
 $moduleSw.Stop()
+$script:timers += @{ Name = 'Total'; Timer = $moduleSw.ElapsedMilliseconds }
+
+$longest = ($script:timers | Sort-Object -Property @{ Expression = { $_.Name.Length } } -Descending | Select-Object -First 1).Name.Length
+$script:timers | ForEach-Object {
+    Write-MyProDebug ("⌛ {0,-$longest} {1,5} ms" -f $_.Name, $_.Timer)
+}
+
 Write-Information "⏲️ $($PSStyle.Foreground.BrightYellow)MyProfile$($PSStyle.Foreground.BrightBlue) processed in $($PSStyle.Foreground.BrightYellow)$($moduleSw.ElapsedMilliseconds)$($PSStyle.Foreground.BrightBlue)ms.$($PSStyle.Reset)" -InformationAction 'Continue' -Tags @($moduleNamespace)

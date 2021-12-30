@@ -1,5 +1,5 @@
 ## Colors / Formatting
-VerboseBlock "Colors / Formatting" {
+VerboseBlock "Theme" {
     if ($isPwsh72) {
         $PSStyle.Formatting.Debug = $PSStyle.Foreground.BrightBlue
         $PSStyle.Formatting.Verbose = $PSStyle.Foreground.BrightBlack
