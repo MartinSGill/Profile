@@ -8,17 +8,29 @@ function script:Get-MyProDropboxFolder {
     [CmdletBinding()]
     param ()
 
-    $info = $null;
-    if (Test-Path (Join-Path $env:APPDATA "dropbox\info.json")) {
-        Write-Verbose "Found dropbox info in APPDATA"
-        $info = Get-Content (Join-Path $env:APPDATA "dropbox\info.json") | ConvertFrom-Json
-    } elseif (Test-Path (Join-Path $env:LOCALAPPDATA "dropbox\info.json")) {
-        Write-Verbose "Found dropbox info in LOCALAPPDATA"
-        $info = Get-Content (Join-Path $env:LOCALAPPDATA "dropbox\info.json") | ConvertFrom-Json
+    if ($IsWindows) {
+
     }
 
+    $info = $null;
+
+    $testPaths = @()
+    if ($IsWindows) {
+        $testPaths = @(
+            (Join-Path "$env:APPDATA" "dropbox\info.json")
+            (Join-Path "$env:LOCALAPPDATA" "dropbox\info.json")
+        )
+    }
+
+    if ($testPaths.Count -le 0) {
+        Write-Warning "Dropbox does not appear to be installed."
+        return $null
+    }
+
+    $path = $testPaths | Where-Object { Test-Path $_ } | Select-Object -First 1
+    $info = Get-Content $path | ConvertFrom-Json
     if ($null -eq $info) {
-        Write-Warning "Dropbox Content Folder not found."
+        Write-Warning "Dropbox info.json invalid."
         return $null
     }
 

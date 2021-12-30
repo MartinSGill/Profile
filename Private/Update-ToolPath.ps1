@@ -34,4 +34,8 @@ function script:Update-ToolPath {
     if (Get-Command -Name 'code-insiders.cmd' -ErrorAction SilentlyContinue) {
         New-Alias -Name 'ci' -Value 'code-insiders.cmd' -Scope Global
     }
+
+    if (Test-Path 'C:\Program Files\Notepad++\notepad++.exe') {
+        New-Alias -Name npp -Value 'C:\Program Files\Notepad++\notepad++.exe' -Scope Global
+    }
 }

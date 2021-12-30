@@ -3,23 +3,16 @@
   <Type>
     <Name>System.IO.FileInfo</Name>
     <Members>
-      <ScriptMethod>
-        <Name>GetFileHash</Name>
-        <Script>
-            param([ValidateSet("SHA1","SHA256","SHA384","SHA512","MD5")]$Algorithm="SHA256")
-            Get-FileHash $this.FullName $Algorithm
-        </Script>
-      </ScriptMethod>
       <ScriptProperty>
         <Name>Sha256</Name>
         <GetScriptBlock>
-            $this.GetHash()
+            Get-FileHash -Path $this -Algorithm SHA256 | Select-Object -ExpandProperty Hash
         </GetScriptBlock>
       </ScriptProperty>
       <ScriptProperty>
         <Name>MD5</Name>
         <GetScriptBlock>
-            $this.GetHash("MD5")
+            Get-FileHash -Path $this -Algorithm MD5 | Select-Object -ExpandProperty Hash
         </GetScriptBlock>
       </ScriptProperty>
     </Members>

@@ -1,4 +1,5 @@
 
+$moduleSw = [System.Diagnostics.Stopwatch]::StartNew()
 ########
 # Debug Mode
 ########
@@ -46,9 +47,7 @@ function Write-MyProWarning ($Message) {
 }
 
 if ($ProfileDebugMode) {
-    Write-MyProDebug "Debug Message"
-    Write-MyProWarning "Warning Message"
-    Write-MyProError "Error Message"
+    Write-MyProDebug ">>> MyProfile Runing in DEBUG Mode <<<"
 }
 
 $script:VerboseDepth = 0
@@ -130,17 +129,26 @@ VerboseBlock "Functions" {
 ## Colors / Formatting
 VerboseBlock "Colors / Formatting" {
     if ($isPwsh72) {
-        $PSStyle.Formatting.Debug = $PSStyle.Foreground.Blue
-        $PSStyle.Formatting.Verbose = $PSStyle.Foreground.LightGray
-        $PSStyle.Formatting.Warning = $PSStyle.Foreground.Yellow
-        $PSStyle.Formatting.Error = $PSStyle.Foreground.Red
+        $PSStyle.Formatting.Debug = $PSStyle.Foreground.BrightBlue
+        $PSStyle.Formatting.Verbose = $PSStyle.Foreground.BrightBlack
+        $PSStyle.Formatting.Warning = $PSStyle.Foreground.BrightYellow
+        $PSStyle.Formatting.Error = $PSStyle.Foreground.BrightRed
 
+        # UI Progress Indicator for WindowsTerminal & ConEmu
         $PSStyle.Progress.UseOSCIndicator = $true
     } else {
         $Host.PrivateData.VerboseForegroundColor = [System.ConsoleColor]::Gray
         $Host.PrivateData.DebugForegroundColor = [System.ConsoleColor]::DarkBlue
         $Host.PrivateData.WarningForegroundColor = [System.ConsoleColor]::Yellow
         $Host.PrivateData.ErrorForegroundColor = [System.ConsoleColor]::Red
+    }
+
+    if ($ProfileDebugMode) {
+        Write-Debug "Example Debug Message" -Debug
+        Write-Verbose "Example Verbose Message" -Verbose
+        Write-Warning "Example Warning Message" -WarningAction 'Continue'
+        Write-Information "Example Information Message" -InformationAction 'Continue'
+        Write-Host "Example Host Message"
     }
 
     VerboseBlock "PS Readline" {
@@ -195,7 +203,7 @@ VerboseBlock "Format Views" {
 }
 
 VerboseBlock "Type Views" {
-    $formats = @( Get-ChildItem -Path $PSScriptRoot\Formats\*.types.ps1xml -ErrorAction SilentlyContinue )
+    $formats = @( Get-ChildItem -Path $PSScriptRoot\Types\*.types.ps1xml -ErrorAction SilentlyContinue )
     foreach ($item in $formats) {
         Write-MyProDebug "Add Type View $($item.BaseName)"
         Update-TypeData -PrependPath $item
@@ -204,14 +212,15 @@ VerboseBlock "Type Views" {
 
 VerboseBlock "Drives" {
     $drives = @(
-        @{ Name = 'dbox'; Root = (Get-MyProDropboxFolder); PSProvider = 'FileSystem'; Scope = 'Global' }
+        @{ Name = 'dbox'; Root = (Get-MyProDropboxFolder -WarningAction 'SilentlyContinue'); PSProvider = 'FileSystem'; Scope = 'Global' }
         @{ Name = 'repo'; Root = '~\source\repos'; PSProvider = 'FileSystem'; Scope = 'Global' }
         @{ Name = 'src'; Root = 'c:\source'; PSProvider = 'FileSystem'; Scope = 'Global' }
+        @{ Name = 'src'; Root = '\source'; PSProvider = 'FileSystem'; Scope = 'Global' }
         @{ Name = 'mypro'; Root = $PSScriptRoot; PSProvider = 'FileSystem'; Scope = 'Global' }
     )
 
     foreach ($drive in $drives) {
-        if (Test-Path $drive.Root) {
+        if ($null -ne $drive.Root -and (Test-Path $drive.Root)) {
             Write-MyProDebug "Adding '$($drive.Name)' drive --> '$($drive.Root)'"
             New-PSDrive @drive
         }
@@ -219,6 +228,7 @@ VerboseBlock "Drives" {
 }
 
 if ($PSVersionTable.Platform -eq "Windows") {
+    Write-MyProDebug "Setting Execution Policy to RemoteSigned"
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
 }
 
@@ -226,3 +236,6 @@ if ($null -eq $env:TERM) {
     Write-MyProDebug "TERM not set, setting to 'xterm'"
     $env:TERM = 'xterm'
 }
+
+$moduleSw.Stop()
+Write-Information "$($PSStyle.Foreground.BrightYellow)MyProfile$($PSStyle.Foreground.BrightBlue) processed in $($PSStyle.Foreground.BrightYellow)$($moduleSw.ElapsedMilliseconds)$($PSStyle.Foreground.BrightBlue)ms.$($PSStyle.Reset)" -InformationAction 'Continue' -Tags @($moduleNamespace)

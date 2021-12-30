@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/PowerShell/PowerShell/v7.2.1/src/Schemas/Format.xsd">
+  <ViewDefinitions>
+    <View>
+    <Name>Timespan</Name>
+    <ViewSelectedBy>
+        <TypeName>VsWhereOutput</TypeName>
+    </ViewSelectedBy>
+    <TableControl>
+      <TableHeaders>
+        <TableColumnHeader>
+          <Label>Name</Label>
+          <!-- <Width>25</Width> -->
+          <Alignment>Left</Alignment>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Channel</Label>
+          <!-- <Width>15</Width> -->
+          <Alignment>Left</Alignment>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Version</Label>
+          <!-- <Width>25</Width> -->
+          <Alignment>Left</Alignment>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Launchable?</Label>
+          <!-- <Width>25</Width> -->
+          <Alignment>Left</Alignment>
+        </TableColumnHeader>
+      </TableHeaders>
+      <TableRowEntries>
+        <TableRowEntry>
+          <Wrap/>
+          <TableColumnItems>
+            <TableColumnItem>
+              <ScriptBlock>
+                $PSStyle.Foreground.Cyan + $_.displayName + $PSStyle.Reset
+              </ScriptBlock>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>channelId</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <ScriptBlock>
+                $PSStyle.Foreground.BrightYellow + $_.installationVersion + $PSStyle.Reset
+              </ScriptBlock>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>isLaunchable</PropertyName>
+            </TableColumnItem>
+          </TableColumnItems>
+        </TableRowEntry>
+      </TableRowEntries>
+    </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>
