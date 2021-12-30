@@ -6,16 +6,16 @@
       <ScriptMethod>
         <Name>ToPlainText</Name>
         <Script>
-                    $plaintext = ""
-                    try {
-                        $BSTR = [System.Runtime.InteropServices.marshal]::SecureStringToBSTR($this);
-                        $plaintext = [System.Runtime.InteropServices.marshal]::PtrToStringAuto($BSTR);
-                    } finally {
-                        if($BSTR -ne [IntPtr]::Zero) {
-                            [System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BSTR);
-                        }
-                    }
-                    Write-Output $plaintext
+          $plaintext = ""
+          try {
+              $BSTR = [System.Runtime.InteropServices.marshal]::SecureStringToBSTR($this);
+              $plaintext = [System.Runtime.InteropServices.marshal]::PtrToStringAuto($BSTR);
+          } finally {
+              if($BSTR -ne [IntPtr]::Zero) {
+                  [System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BSTR);
+              }
+          }
+          Write-Output $plaintext
         </Script>
       </ScriptMethod>
     </Members>

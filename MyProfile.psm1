@@ -110,8 +110,8 @@ if ($abort) {
 }
 
 VerboseBlock "Functions" {
-    $script:publicFunctions =  @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse -ErrorAction SilentlyContinue )
-    $privateFunctions =  @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
+    $script:publicFunctions = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+    $privateFunctions = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
 
     foreach($import in @($publicFunctions + $privateFunctions))
     {
@@ -184,6 +184,23 @@ VerboseBlock "Exports" {
         Export-ModuleMember -Function $item.BaseName
     }
 
+}
+
+VerboseBlock "Format Views" {
+    Import-MyProHumanizer
+    $formats = @( Get-ChildItem -Path $PSScriptRoot\Formats\*.formats.ps1xml -ErrorAction SilentlyContinue )
+    foreach ($item in $formats) {
+        Write-MyProDebug "Add Format View $($item.BaseName)"
+        Update-FormatData -PrependPath $item
+    }
+}
+
+VerboseBlock "Type Views" {
+    $formats = @( Get-ChildItem -Path $PSScriptRoot\Formats\*.types.ps1xml -ErrorAction SilentlyContinue )
+    foreach ($item in $formats) {
+        Write-MyProDebug "Add Type View $($item.BaseName)"
+        Update-TypeData -PrependPath $item
+    }
 }
 
 if ($PSVersionTable.Platform -eq "Windows") {
