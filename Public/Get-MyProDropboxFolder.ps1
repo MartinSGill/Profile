@@ -1,5 +1,5 @@
 
-function script:Get-DropBoxFolder {
+function script:Get-MyProDropboxFolder {
     <#
         .SYNOPSIS
             Find the location where Dropbox stores files

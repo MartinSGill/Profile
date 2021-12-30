@@ -183,7 +183,6 @@ VerboseBlock "Exports" {
         Write-MyProDebug "Exporting $($item.BaseName)"
         Export-ModuleMember -Function $item.BaseName
     }
-
 }
 
 VerboseBlock "Format Views" {
@@ -200,6 +199,22 @@ VerboseBlock "Type Views" {
     foreach ($item in $formats) {
         Write-MyProDebug "Add Type View $($item.BaseName)"
         Update-TypeData -PrependPath $item
+    }
+}
+
+VerboseBlock "Drives" {
+    $drives = @(
+        @{ Name = 'dbox'; Root = (Get-MyProDropboxFolder); PSProvider = 'FileSystem'; Scope = 'Global' }
+        @{ Name = 'repo'; Root = '~\source\repos'; PSProvider = 'FileSystem'; Scope = 'Global' }
+        @{ Name = 'src'; Root = 'c:\source'; PSProvider = 'FileSystem'; Scope = 'Global' }
+        @{ Name = 'mypro'; Root = $PSScriptRoot; PSProvider = 'FileSystem'; Scope = 'Global' }
+    )
+
+    foreach ($drive in $drives) {
+        if (Test-Path $drive.Root) {
+            Write-MyProDebug "Adding '$($drive.Name)' drive --> '$($drive.Root)'"
+            New-PSDrive @drive
+        }
     }
 }
 

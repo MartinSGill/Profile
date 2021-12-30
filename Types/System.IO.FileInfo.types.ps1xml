@@ -4,7 +4,7 @@
     <Name>System.IO.FileInfo</Name>
     <Members>
       <ScriptMethod>
-        <Name>GetHash</Name>
+        <Name>GetFileHash</Name>
         <Script>
             param([ValidateSet("SHA1","SHA256","SHA384","SHA512","MD5")]$Algorithm="SHA256")
             Get-FileHash $this.FullName $Algorithm
