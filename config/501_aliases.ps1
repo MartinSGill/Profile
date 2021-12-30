@@ -1,0 +1,4 @@
+
+VerboseBlock "Aliases" {
+    Update-ToolPath
+}
