@@ -36,6 +36,6 @@ function script:Update-ToolPath {
     }
 
     if (Test-Path 'C:\Program Files\Notepad++\notepad++.exe') {
-        New-Alias -Name npp -Value 'C:\Program Files\Notepad++\notepad++.exe' -Scope Global
+        New-Alias -Name 'npp' -Value 'C:\Program Files\Notepad++\notepad++.exe' -Scope Global
     }
 }
