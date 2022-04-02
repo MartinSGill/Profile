@@ -113,7 +113,7 @@ VerboseBlock "Checking Modules" {
         if ($null -eq $_.Found) {
             $script:abort = $true
             Write-MyProError "${prefix}Missing module $($_.Name)"
-        } elseif ($null -ne $_.MinimumVersion -and [Version]::new($_.MinimumVersion) -lt $_.Found) {
+        } elseif ($null -ne $_.MinimumVersion -and [Version]::new($_.MinimumVersion) -gt [Version]::new($_.Found)) {
             $script:abort = $true
             Write-MyProError "${prefix}Expected module $($_.Name) to >= $($_.MinimumVersion). Found $($_.Found)"
         }
