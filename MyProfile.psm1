@@ -45,6 +45,16 @@ function Write-MyProDebug() {
     }
 }
 
+function Write-MyProError() {
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline=$true)]
+        [string]$Message
+    )
+    $space = "  " * $script:VerboseDepth
+    Write-Information "${messagePrefix}$($PSStyle.Foreground.Red)ERROR$($PSStyle.Reset): ${space}${Message}" -Tags @('MyPro', 'Error') -InformationAction "Continue"
+}
+
 if ($ProfileDebugMode) {
     Write-MyProDebug ">>> MyProfile Runing in DEBUG Mode <<<"
 }
@@ -102,15 +112,16 @@ VerboseBlock "Checking Modules" {
 
         if ($null -eq $_.Found) {
             $script:abort = $true
-            Write-Error "${prefix}Missing module $($_.Name)"
+            Write-MyProError "${prefix}Missing module $($_.Name)"
         } elseif ($null -ne $_.MinimumVersion -and [Version]::new($_.MinimumVersion) -lt $_.Found) {
             $script:abort = $true
-            Write-Error "${prefix}Expected module $($_.Name) to >= $($_.MinimumVersion). Found $($_.Found)"
+            Write-MyProError "${prefix}Expected module $($_.Name) to >= $($_.MinimumVersion). Found $($_.Found)"
         }
     }
 }
 
 if ($script:abort) {
+    Write-MyProError "Aborting Profile Import."
     throw "Aborting Profile Import."
 }
 
@@ -127,7 +138,7 @@ VerboseBlock "Functions" {
         }
         catch
         {
-            Write-Error -Message "Failed to import function $($import.FullName): $_"
+            Write-MyProError -Message "Failed to import function $($import.FullName): $_"
         }
     }
 }
