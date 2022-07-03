@@ -102,7 +102,6 @@ VerboseBlock "Checking Modules" {
         @{ Name = "PSReadline"; MinimumVersion = "2.2.0" }
         @{ Name = "Terminal-Icons" }
         @{ Name = "posh-git" }
-        @{ Name = "oh-my-posh" }
     )
 
     $requiredModules | ForEach-Object {
@@ -166,4 +165,4 @@ $script:timers | ForEach-Object {
     Write-MyProDebug ("⌛ {0,-$longest} {1,5} ms" -f $_.Name, $_.Timer)
 }
 
-Write-Information "⏲️ $($PSStyle.Foreground.BrightYellow)MyProfile$($PSStyle.Foreground.BrightBlue) processed in $($PSStyle.Foreground.BrightYellow)$($moduleSw.ElapsedMilliseconds)$($PSStyle.Foreground.BrightBlue)ms.$($PSStyle.Reset)" -InformationAction 'Continue' -Tags @($moduleNamespace)
+Write-Information "⏲️  $($PSStyle.Foreground.BrightYellow)MyProfile$($PSStyle.Foreground.BrightBlue) processed in $($PSStyle.Foreground.BrightYellow)$($moduleSw.ElapsedMilliseconds)$($PSStyle.Foreground.BrightBlue) ms.$($PSStyle.Reset)" -InformationAction 'Continue' -Tags @($moduleNamespace)

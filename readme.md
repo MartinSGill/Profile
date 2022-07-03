@@ -8,17 +8,16 @@ your own profile.
 
 ## Recent Changes
 
-* Simplified to improve load times.
-* Recommended for 7.2
-* Not recommended for Windows Powershell (v5.x)
+* Migration of
 
 ## Dependencies
 
 Mandatory:
 
 ```powershell
+winget install JanDeDobbeleer.OhMyPosh -s winget
+# OR scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json
 Install-Module Terminal-Icons
-Install-Module oh-my-posh
 Install-Module posh-git
 Install-Module PSReadline -AllowPrerelease -Force
 ```
