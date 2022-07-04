@@ -16,6 +16,8 @@ VerboseBlock "Retire Oh-My-Posh PS" {
 
         if (Get-Command -Name "winget.exe") {
             Write-Warning "Installing Oh-My-Posh using winget"
+            Write-Warning "YOU MUST RESTART Terminal for updated path"
+            winget install JanDeDobbeleer.OhMyPosh -s winget
         }
         elseif (Get-Command -Name "scoop.ps1") {
             Write-Warning "Installing Oh-My-Posh using scoop (winget not found)"

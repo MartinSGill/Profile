@@ -40,7 +40,7 @@ function script:Update-PSReadLine {
     Set-PSReadLineKeyHandler Ctrl+h BackwardDeleteWord
     Set-PSReadLineKeyHandler Ctrl+Enter AddLine
     Set-PSReadLineKeyHandler Ctrl+Shift+Enter AcceptAndGetNext
-    Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+    Set-PSReadlineKeyHandler -Key Tab -Function Complete
 
     # Sometimes you enter a command but realize you forgot to do something else first.
     # This binding will let you save that command in the history so you can recall it,
