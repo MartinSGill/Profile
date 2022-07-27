@@ -34,6 +34,6 @@ VerboseBlock "Theme" {
     }
 
     VerboseBlock "Oh-My-Posh" {
-        oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\night-owl.omp.json" | Invoke-Expression
+        oh-my-posh init pwsh --config "$PSScriptRoot/../themes/mytheme.omp.json" | Invoke-Expression
     }
 }
