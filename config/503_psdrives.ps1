@@ -3,8 +3,8 @@ VerboseBlock "Drives" {
     $drives = @(
         @{ Name = 'dbox'; Root = (Get-MyProDropboxFolder -WarningAction 'SilentlyContinue'); PSProvider = 'FileSystem'; Scope = 'Global' }
         @{ Name = 'repo'; Root = '~/source/repos'; PSProvider = 'FileSystem'; Scope = 'Global' }
-        @{ Name = 'src'; Root = 'c:/source'; PSProvider = 'FileSystem'; Scope = 'Global' }
-        @{ Name = 'src'; Root = '/source'; PSProvider = 'FileSystem'; Scope = 'Global' }
+        @{ Name = 'projects'; Root = 'c:/projects'; PSProvider = 'FileSystem'; Scope = 'Global' }
+        @{ Name = 'projects'; Root = '/projects'; PSProvider = 'FileSystem'; Scope = 'Global' }
         @{ Name = 'mypro'; Root = "$PSScriptRoot/.."; PSProvider = 'FileSystem'; Scope = 'Global' }
     )
 
