@@ -197,6 +197,18 @@
           "type": "root"
         },
         {
+          "type": "shell",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#000000",
+          "background": "#ff9639",
+          "properties": {
+            "mapped_shell_names": {
+              "pwsh": "PS"
+            }
+          }
+        },
+        {
           "foreground": "#f1184c",
           "style": "plain",
           "template": "🚀 ",
