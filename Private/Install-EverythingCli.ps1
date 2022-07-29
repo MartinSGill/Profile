@@ -6,6 +6,17 @@ function script:Install-EverythingCli {
         return
     }
 
+    # Test for cli
+    if (Test-Path "$env:LOCALAPPDATA\Everything\es.exe") {
+        $p = @{
+            SearchPath = @("$env:LOCALAPPDATA\Everything")
+            ToolName = 'es.exe'
+            AliasName = 'es'
+        }
+        New-MyProToolAlias @p
+        return
+    }
+
     if (-not (Test-MyProCommand -Name winget)) {
         Write-Warning "Winget not available, reduced functionality likely"
     }

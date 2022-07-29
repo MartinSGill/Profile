@@ -23,6 +23,23 @@ function script:Resolve-MyProCommand {
         [string] $Name
     )
     process {
+        if ($IsWindows) {
+            $path = where.exe $Name 2>&1
+            if ($?) {
+                return $path
+            }
+        } else {
+            $path = which $Name 2>&1
+            if ($?) {
+                return $path
+            }
+        }
+
+        $alias = Get-Alias -Name $Name -ErrorAction SilentlyContinue
+        if ($?) {
+            return $alias;
+        }
+
         Get-Command $Name -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Source
     }
 }
