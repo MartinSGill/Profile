@@ -28,7 +28,13 @@ function script:Get-MyProDropboxFolder {
     }
 
     $path = $testPaths | Where-Object { Test-Path $_ } | Select-Object -First 1
+
+    if ($null -eq $path) {
+        Write-MyProDebug "Dropbox is not found";
+        return $null;
+    }
     $info = Get-Content $path | ConvertFrom-Json
+
     if ($null -eq $info) {
         Write-Warning "Dropbox info.json invalid."
         return $null

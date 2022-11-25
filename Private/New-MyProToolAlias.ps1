@@ -19,12 +19,15 @@ function script:New-MyProToolAlias {
     $f = $PSStyle.Reset
 
     # First portable/dropbox
-    $dropboxPortable = Join-Path -Path (Get-MyProDropboxFolder) 'Software' -AdditionalChildPath 'portable'
-    $portable = Get-ChildItem -Path $dropboxPortable -Recurse -Filter $ToolName | Select-Object -First 1
-    if (-not [String]::IsNullOrWhiteSpace($portable)) {
-        Write-MyProDebug "Set Tool Alias ${s}${AliasName}${f} -> ${s}${portable}${f}"
-        New-Alias -Name $AliasName -Value $portable -Scope Global
-        return
+    $dropboxPath = Get-MyProDropboxFolder;
+    if (-not [String]::IsNullOrWhiteSpace($dropboxPath)) {
+        $dropboxPortable = Join-Path -Path ($dropboxPath) 'Software' -AdditionalChildPath 'portable'
+        $portable = Get-ChildItem -Path $dropboxPortable -Recurse -Filter $ToolName | Select-Object -First 1
+        if (-not [String]::IsNullOrWhiteSpace($portable)) {
+            Write-MyProDebug "Set Tool Alias ${s}${AliasName}${f} -> ${s}${portable}${f}"
+            New-Alias -Name $AliasName -Value $portable -Scope Global
+            return
+        }
     }
 
     # Then Check in path
