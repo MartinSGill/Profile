@@ -19,6 +19,6 @@ function script:Test-MyProCommand {
         [string] $Name
     )
     process {
-        $null -ne (Get-Command $Name -ErrorAction SilentlyContinue)
+        $null -ne (Resolve-MyProCommand $Name -ErrorAction SilentlyContinue)
     }
 }

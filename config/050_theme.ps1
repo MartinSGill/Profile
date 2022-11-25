@@ -34,7 +34,6 @@ VerboseBlock "Theme" {
     }
 
     VerboseBlock "Oh-My-Posh" {
-        Import-Module oh-my-posh
-        Set-PoshPrompt -Theme night-owl
+        oh-my-posh init pwsh --config "$PSScriptRoot/../themes/mytheme.omp.json" | Invoke-Expression
     }
 }

@@ -41,7 +41,7 @@ function script:Clear-MyProSpace {
     }
 
     if ($Help) {
-        Get-Help "$PSScriptRoot/clean-space.ps1"
+        Get-Help Clear-MyProSpace
         return
     }
 
