@@ -9,6 +9,7 @@ enum MyProTerminals {
     Console2Z
     ConEmu
     FluentTerminal
+    AzureCloudShell
 }
 
 function script:Get-MyProTerminal {
@@ -30,6 +31,10 @@ function script:Get-MyProTerminal {
     # IntelliJ
     if ($env:TERMINAL_EMULATOR -eq "JetBrains-JediTerm") {
         return [MyProTerminals]::JetBrainsJediTerm
+    }
+
+    if ($null -ne $env:ACC_CLOUD)  {
+        return [MyProTerminals]::AzureCloudShell
     }
 
     # Resort to Process Name
