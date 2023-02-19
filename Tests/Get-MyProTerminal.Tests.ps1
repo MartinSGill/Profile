@@ -1,9 +1,12 @@
+#Requires -Modules @{ ModuleName="Pester"; ModuleVersion="5.4.0" }
 
-. '..\Public\Get-MyProTerminal.ps1'
+Describe 'Get-MyProTerminal' {
+    BeforeAll {
+        . "$PSScriptRoot\..\Public\Get-MyProTerminal.ps1"
+    }
 
-Describe "Get-MyProTerminal" {
-    Context "when $ListKnown switch is used" {
-        It "returns an array of known terminal names" {
+    Context 'when -ListKnown switch is used' {
+        It 'returns an array of known terminal names' {
             $result = Get-MyProTerminal -ListKnown
             $result | Should -Not -Contain 'Unknown'
         }
@@ -11,78 +14,113 @@ Describe "Get-MyProTerminal" {
 
     $testCases = @(
         @{
-            Name = 'VS Code'
-            Input = { $env:TERM_PROGRAM = 'vscode' }
-            Output = 'VsCode'
+            Name   = 'VS Code'
+            Arrange  = {
+                $env:TERM_PROGRAM = 'vscode'
+                $env:TERM_PROGRAM = $null
+                $env:TERMINAL_EMULATOR = $null
+                $env:ACC_CLOUD = $null
+            }
+            Expected = 'VsCode'
         },
         @{
-            Name = 'JetBrains JediTerm'
-            Input = { $env:TERMINAL_EMULATOR = 'JetBrains-JediTerm' }
-            Output = 'JetBrainsJediTerm'
+            Name   = 'JetBrains JediTerm'
+            Arrange  = {
+                $env:TERM_PROGRAM = $null
+                $env:TERMINAL_EMULATOR = $null
+                $env:ACC_CLOUD = $null
+                $env:TERMINAL_EMULATOR = 'JetBrains-JediTerm'
+            }
+            Expected = 'JetBrainsJediTerm'
         },
         @{
-            Name = 'Azure Cloud Shell'
-            Input = { $env:ACC_CLOUD = 1 }
-            Output = 'AzureCloudShell'
+            Name   = 'Azure Cloud Shell'
+            Arrange  = {
+                $env:TERM_PROGRAM = $null
+                $env:TERMINAL_EMULATOR = $null
+                $env:ACC_CLOUD = $null
+                $env:ACC_CLOUD = 1
+            }
+            Expected = 'AzureCloudShell'
         },
         @{
-            Name = 'Windows Terminal'
-            Input = {
+            Name   = 'Windows Terminal'
+            Arrange  = {
+                $env:TERM_PROGRAM = $null
+                $env:TERMINAL_EMULATOR = $null
+                $env:ACC_CLOUD = $null
                 $processName = 'WindowsTerminal'
                 Mock Get-Process { return @{ Parent = @{ Name = $processName } } }
             }
-            Output = 'WindowsTerminal'
+            Expected = 'WindowsTerminal'
         },
         @{
-            Name = 'Windows Console'
-            Input = {
+            Name   = 'Windows Console'
+            Arrange  = {
+                $env:TERM_PROGRAM = $null
+                $env:TERMINAL_EMULATOR = $null
+                $env:ACC_CLOUD = $null
                 $processName = 'explorer'
                 Mock Get-Process { return @{ Parent = @{ Name = $processName } } }
             }
-            Output = 'WindowsConsole'
+            Expected = 'WindowsConsole'
         },
         @{
-            Name = 'Console2Z'
-            Input = {
+            Name   = 'Console2Z'
+            Arrange  = {
+                $env:TERM_PROGRAM = $null
+                $env:TERMINAL_EMULATOR = $null
+                $env:ACC_CLOUD = $null
                 $processName = 'Console'
                 Mock Get-Process { return @{ Parent = @{ Name = $processName } } }
             }
-            Output = 'Console2Z'
+            Expected = 'Console2Z'
         },
         @{
-            Name = 'ConEmu'
-            Input = {
+            Name   = 'ConEmu'
+            Arrange  = {
+                $env:TERM_PROGRAM = $null
+                $env:TERMINAL_EMULATOR = $null
+                $env:ACC_CLOUD = $null
                 $processName = 'ConEmuC64'
                 Mock Get-Process { return @{ Parent = @{ Name = $processName } } }
             }
-            Output = 'ConEmu'
+            Expected = 'ConEmu'
         },
         @{
-            Name = 'FluentTerminal'
-            Input = {
+            Name   = 'FluentTerminal'
+            Arrange  = {
+                $env:TERM_PROGRAM = $null
+                $env:TERMINAL_EMULATOR = $null
+                $env:ACC_CLOUD = $null
                 $processName = 'FluentTerminal.SystemTray'
                 Mock Get-Process { return @{ Parent = @{ Name = $processName } } }
             }
-            Output = 'FluentTerminal'
+            Expected = 'FluentTerminal'
         },
         @{
-            Name = 'Unknown'
-            Input = [scriptblock]{
+            Name   = 'Unknown'
+            Arrange  = [scriptblock] {
+                $env:TERM_PROGRAM = $null
+                $env:TERMINAL_EMULATOR = $null
+                $env:ACC_CLOUD = $null
                 $processName = 'unknown'
                 Mock Get-Process { return @{ Parent = @{ Name = $processName } } }
             }
-            Output = 'Unknown'
+            Expected = 'Unknown'
         }
     )
 
-    $testCases | ForEach-Object {
-        Context "when run on $($_.Name)" {
-            BeforeEach {
-                Invoke-Command -ScriptBlock $_.Input
-            }
-            It "should return $($_.Output)" {
-                (Get-MyProTerminal) | Should -Be $($_.Output)
-            }
+    Context "Detecting Terminal" {
+        It "Returns <expected> (<name>)" -TestCases $testCases {
+            # Arrange
+            Invoke-Command -ScriptBlock $Arrange
+
+            # Act
+            $actual = Get-MyProTerminal
+
+            # Assert
+            $actual | Should -Be $($Expected)
         }
     }
 }
