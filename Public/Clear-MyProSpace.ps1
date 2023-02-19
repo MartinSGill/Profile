@@ -45,16 +45,6 @@ function script:Clear-MyProSpace {
         return
     }
 
-    # Self-elevate the script if required
-    # Isn't working the way I want, atm.
-    # if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
-    #     if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
-    #         $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
-    #         Start-Process -FilePath pwsh.exe -Verb Runas -ArgumentList $CommandLine
-    #         Exit
-    #     }
-    # }
-
     if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
         Write-Error "Must Run as Administrator."
         return
@@ -248,7 +238,5 @@ function script:Clear-MyProSpace {
                                         @{ Label = "🏁 ${cFolder}End$cReset";    Expression = { "🏁 ${cFolder}{0,6:n1} {1,-2:s}$cReset" -f $_.EndFree.bytes.LargestWholeNumberValue, $_.EndFree.bytes.LargestWholeNumberSymbol } },
                                         @{ Label = "✔ ${cSuccess}Freed$cReset"; Expression = { "✔ ${cSuccess}{0,6:n1} {1,-2:s}$cReset" -f $_.Recovered.bytes.LargestWholeNumberValue, $_.Recovered.bytes.LargestWholeNumberSymbol  }}
     Write-Host
-    results
     Write-Host "${cSuccess}Done. Bye. 🙋‍$cReset"
-    pause
 }
