@@ -25,7 +25,6 @@ if ($env:MyProfileDebugMode) {
 ########
 # Critical Variables
 ########
-$isPwsh72 = $PSVersionTable.PSVersion.Major -ge 7 -and $PSVersionTable.PSVersion.Minor -ge 2
 $moduleNamespace = "MyPro"
 $messagePrefix = "$($PSStyle.Foreground.BrightBlack)${moduleNamespace}$($PSStyle.Reset): "
 
