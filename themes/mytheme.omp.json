@@ -1,8 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-  "blocks": [{
+  "blocks": [
+    {
       "alignment": "left",
-      "segments": [{
+      "segments": [
+        {
           "background": "#b8e6ff",
           "foreground": "#000000",
           "properties": {
@@ -11,7 +13,7 @@
           "style": "diamond",
           "leading_diamond": "\uE0B6",
           "trailing_diamond": "\uE0B4",
-          "template": "\ufd03{{ .Origin }}: {{ .Name }}",
+          "template": "\ufd03\uebc4{{ .Name }}",
           "type": "az"
         },
         {
@@ -23,7 +25,7 @@
           "style": "diamond",
           "leading_diamond": "\uE0B6",
           "trailing_diamond": "\uE0B4",
-          "template": "\ufd03{{ .Origin }}: {{ .Name }}",
+          "template": "\ufd03\uebc7{{ .Name }}",
           "type": "az"
         },
         {
@@ -66,15 +68,15 @@
           "background": "#4063D8",
           "template": "\uE738 {{ .Full }}"
         },
-        {
-          "type": "kubectl",
-          "style": "diamond",
-          "leading_diamond": "\uE0B6",
-          "trailing_diamond": "\uE0B4",
-          "foreground": "#000000",
-          "background": "#ebcc34",
-          "template": "\uFD31 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
-        },
+        // {
+        //   "type": "kubectl",
+        //   "style": "diamond",
+        //   "leading_diamond": "\uE0B6",
+        //   "trailing_diamond": "\uE0B4",
+        //   "foreground": "#000000",
+        //   "background": "#ebcc34",
+        //   "template": "\uFD31 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
+        // },
         {
           "type": "node",
           "style": "diamond",
@@ -122,7 +124,8 @@
     {
       "alignment": "left",
       "newline": true,
-      "segments": [{
+      "segments": [
+        {
           "background": "#ff9639",
           "foreground": "#000000",
           "style": "powerline",
@@ -130,23 +133,17 @@
           "type": "os"
         },
         {
-          "background": "#00ffd5",
-          "foreground": "#000000",
-          "powerline_symbol": "\ue0b0",
-          "style": "powerline",
-          "template": "🕺{{ .UserName }} ",
-          "type": "session"
-        },
-        {
           "background": "#fff700",
           "foreground": "#003544",
           "powerline_symbol": "\ue0b0",
           "properties": {
             "folder_separator_icon": "/",
-            "style": "short"
+            "style": "mixed",
+            "mixed_threshold": 4,
+            "folder_icon": "📂"
           },
           "style": "powerline",
-          "template": " 📂{{ .Path }} ",
+          "template": "{{ .Path }}",
           "type": "path"
         },
         {
@@ -169,9 +166,7 @@
         },
         {
           "background": "#33DD2D",
-          "background_templates": [
-            "{{ if gt .Code 0 }}#f1184c{{ end }}"
-          ],
+          "background_templates": ["{{ if gt .Code 0 }}#f1184c{{ end }}"],
           "foreground": "#242424",
           "powerline_symbol": "\ue0b0",
           "properties": {
@@ -187,15 +182,16 @@
     {
       "alignment": "left",
       "newline": true,
-      "segments": [{
-          "foreground": "#FFD700",
-          "properties": {
-            "root_icon": "\u26a1"
-          },
-          "style": "plain",
-          "template": " \uf0e7 ",
-          "type": "root"
+      "segments": [
+        {
+          "background": "#00ffd5",
+          "foreground": "#000000",
+          "powerline_symbol": "\ue0b0",
+          "style": "powerline",
+          "template": "🕺{{ .UserName }} ",
+          "type": "session"
         },
+
         {
           "type": "shell",
           "style": "powerline",
@@ -207,6 +203,15 @@
               "pwsh": "PS"
             }
           }
+        },
+        {
+          "foreground": "#FFD700",
+          "properties": {
+            "root_icon": "\u26a1"
+          },
+          "style": "plain",
+          "template": " \uf0e7 ",
+          "type": "root"
         },
         {
           "foreground": "#f1184c",

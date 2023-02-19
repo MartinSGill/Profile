@@ -18,7 +18,7 @@ function script:New-MyProToolAlias {
     $s = $PSStyle.Foreground.Yellow
     $f = $PSStyle.Reset
 
-    if ($null -ne (Get-MyProDropboxFolder -ErrorAction SilentlyContinue)) {
+    if (-not [String]::IsNullOrWhiteSpace((Get-MyProDropboxFolder -ErrorAction SilentlyContinue))) {
         # First portable/dropbox
         $dropboxPortable = Join-Path -Path (Get-MyProDropboxFolder) 'Software' -AdditionalChildPath 'portable'
         $portable = Get-ChildItem -Path $dropboxPortable -Recurse -Filter $ToolName | Select-Object -First 1
@@ -27,7 +27,8 @@ function script:New-MyProToolAlias {
             New-Alias -Name $AliasName -Value $portable -Scope Global
             return
         }
-    } else {
+    }
+    else {
         Write-MyProDebug "Dropbox not found/installed"
     }
 

@@ -6,10 +6,10 @@ enum MyProTerminals {
     JetBrainsJediTerm
     WindowsTerminal
     WindowsConsole
-    AzureCloudShell
     Console2Z
     ConEmu
     FluentTerminal
+    AzureCloudShell
 }
 
 function script:Get-MyProTerminal {
@@ -34,7 +34,7 @@ function script:Get-MyProTerminal {
     }
 
     # AzureCloudShell
-    if ($env:ACC_CLOUD -eq "True") {
+    if ($null -ne $env:ACC_CLOUD)  {
         return [MyProTerminals]::AzureCloudShell
     }
 
