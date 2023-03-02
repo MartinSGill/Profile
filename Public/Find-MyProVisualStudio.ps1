@@ -4,7 +4,7 @@ function script:Find-MyProVisualStudio {
     param ()
 
     if (-not $IsWindows) {
-        Write-Error "Only supported on Windows."
+        Write-Error 'Only supported on Windows.'
         return
     }
 

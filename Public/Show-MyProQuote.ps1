@@ -8,9 +8,9 @@
     #>
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true,
-        ValueFromPipeline=$true,
-        ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory = $true,
+            ValueFromPipeline = $true,
+            ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         # The text to format.
@@ -35,9 +35,9 @@
     }
 
     $myStack = New-Object System.Collections.Queue
-    $quote -split " " | ForEach-Object { $myStack.Enqueue($_) }
+    $quote -split ' ' | ForEach-Object { $myStack.Enqueue($_) }
 
-    $leftIndent = "  "
+    $leftIndent = '  '
     $rightOutdent = "  $($PSStyle.Reset)"
     $tl = "${FrameColor}┌"
     $tr = "${FrameColor}┐"
@@ -47,20 +47,20 @@
     $hr = "${FrameColor}─"
     $hd = "${FrameColor}┬"
 
-    $blankLine = "$BackgroundColor" + (" " * ($Width + 6))
+    $blankLine = "$BackgroundColor" + (' ' * ($Width + 6))
 
     Write-Host $blankLine
     Write-Host -Object ($BackgroundColor + $leftIndent + $tl + ($hr * $Width) + $tr + $rightOutdent)
 
     $count = 0
-    $curLine = ""
+    $curLine = ''
     while ($myStack.Count -gt 0) {
-        if (($curLine + " " + $myStack.Peek()).Length -gt ($Width - 2)) {
+        if (($curLine + ' ' + $myStack.Peek()).Length -gt ($Width - 2)) {
             Write-Host -Object ("$BackgroundColor$leftIndent{0}$QuoteColor{1,-$($Width)}{0}$rightOutdent" -f $vr, $curLine)
-            $curLine = " " + $myStack.Dequeue()
+            $curLine = ' ' + $myStack.Dequeue()
         } else {
             $count++
-            $curLine += " " + $myStack.Dequeue()
+            $curLine += ' ' + $myStack.Dequeue()
         }
     }
     Write-Host -Object ("$BackgroundColor$leftIndent{0}$QuoteColor{1,-$Width}{0}$RightOutdent" -f $vr, $curLine)

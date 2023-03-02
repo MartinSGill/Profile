@@ -5,9 +5,9 @@ function script:Get-MyProStringHash {
     #>
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true,
-                    ValueFromPipeline=$true,
-                    ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory = $true,
+            ValueFromPipeline = $true,
+            ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         # String to encode
         [string] $String,

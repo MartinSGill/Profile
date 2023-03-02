@@ -6,10 +6,10 @@ function script:ConvertTo-MyProEncodedCommand {
     [CmdletBinding()]
 
     param (
-        [Parameter(Mandatory=$true,
-                    Position=0,
-                    ValueFromPipeline=$true,
-                    ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory = $true,
+            Position = 0,
+            ValueFromPipeline = $true,
+            ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
         # Command (string) to encode.

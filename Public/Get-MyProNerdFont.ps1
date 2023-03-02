@@ -6,7 +6,7 @@ class NerdFontInfo {
 }
 
 function script:Get-MyProNerdFont() {
-    $url = "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest"
+    $url = 'https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest'
     $releaseInfo = Invoke-RestMethod -Method Get -Uri $url
 
     foreach ($asset in $releaseInfo.assets) {

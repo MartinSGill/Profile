@@ -26,7 +26,7 @@ function script:Resolve-MyProCommand {
         if ($IsWindows) {
             $path = where.exe $Name 2>&1
             if ($?) {
-                return $path
+                return $path | Select-Object -First 1
             }
         } else {
             $path = which $Name 2>&1

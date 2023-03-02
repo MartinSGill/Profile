@@ -42,26 +42,26 @@ function script:Install-MyProFont {
 
     begin {
         Set-Variable Fonts -Value 0x14 -Option ReadOnly
-        $fontRegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+        $fontRegistryPath = 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts'
 
         $shell = New-Object -ComObject Shell.Application
         $folder = $shell.NameSpace($Fonts)
         $objfontFolder = $folder.self.Path
         #$copyOptions = 20
-        $copyFlag = [string]::Format("{0:x}", 4 + 16)
+        $copyFlag = [string]::Format('{0:x}', 4 + 16)
         $copyFlag
     }
 
     process {
         switch ($PsCmdlet.ParameterSetName) {
-            "Directory" {
+            'Directory' {
                 ForEach ($fontsFolder in $Path) {
                     Write-Verbose -Message "Processing folder {$fontsFolder}"
-                    $fontFiles = Get-ChildItem -Path $fontsFolder -File -Recurse -Include @("*.fon", "*.fnt", "*.ttf", "*.ttc", "*.otf", "*.mmm", "*.pbf", "*.pfm")
+                    $fontFiles = Get-ChildItem -Path $fontsFolder -File -Recurse -Include @('*.fon', '*.fnt', '*.ttf', '*.ttc', '*.otf', '*.mmm', '*.pbf', '*.pfm')
                 }
             }
-            "File" {
-                $fontFiles = Get-ChildItem -Path $FontFile -Include @("*.fon", "*.fnt", "*.ttf", "*.ttc", "*.otf", "*.mmm", "*.pbf", "*.pfm")
+            'File' {
+                $fontFiles = Get-ChildItem -Path $FontFile -Include @('*.fon', '*.fnt', '*.ttf', '*.ttc', '*.otf', '*.mmm', '*.pbf', '*.pfm')
             }
         }
         if ($fontFiles) {

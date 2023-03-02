@@ -13,7 +13,7 @@ function script:Install-MyProNerdFont() {
     DynamicParam {
         $dictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
 
-        $fontNames =  Get-MyProNerdFont | Select-Object -ExpandProperty FontName
+        $fontNames = Get-MyProNerdFont | Select-Object -ExpandProperty FontName
         New-MyProDynamicParam -Name FontName -ValidateSet $fontNames -Mandatory -DpDictionary $dictionary -ValueFromPipelineByPropertyName
         return $dictionary
     }
@@ -26,17 +26,17 @@ function script:Install-MyProNerdFont() {
     process {
 
         if (-not $IsWindows) {
-            Write-Error "Only supported on Windows."
+            Write-Error 'Only supported on Windows.'
             return
         }
 
         if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
-            Write-Error "Must Run as Administrator."
+            Write-Error 'Must Run as Administrator.'
             return
         }
 
         $FontName = $PSBoundParameters.FontName
-        $fontInfo = $Fonts | Where-Object FontName -eq $FontName
+        $fontInfo = $Fonts | Where-Object FontName -EQ $FontName
         $url = $fontInfo.DownloadUrl
 
         $tempFolder = New-MyProTempFolder
@@ -49,7 +49,7 @@ function script:Install-MyProNerdFont() {
         Write-Verbose "Extract: ${tempZip}"
         Expand-Archive -Path $tempZip -DestinationPath $tempFolder
 
-        $fontFiles = Get-ChildItem -Path $tempFolder -Filter "*.?tf" -Verbose
+        $fontFiles = Get-ChildItem -Path $tempFolder -Filter '*.?tf' -Verbose
 
         $fontFileInfos = @()
         foreach ($file in $fontFiles) {

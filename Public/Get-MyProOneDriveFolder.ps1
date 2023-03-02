@@ -5,15 +5,16 @@ function script:Get-MyProOneDriveFolder() {
         [switch]$FullInfo
     )
     if (-not $IsWindows) {
-        Write-Error "Only supported on Windows"
+        Write-Error 'Only supported on Windows'
         return
     }
 
     $folders = Get-ChildItem HKCU:\Software\Microsoft\OneDrive\Accounts\ |
         ForEach-Object { [pscustomobject]@{
-            Name = Split-Path $_.Name -Leaf;
-            Folder = $_.GetValue('UserFolder');
-            UserEmail = $_.GetValue('UserEmail') } }
+                Name      = Split-Path $_.Name -Leaf
+                Folder    = $_.GetValue('UserFolder')
+                UserEmail = $_.GetValue('UserEmail')
+            } }
 
     if ($FullInfo) {
         $folders

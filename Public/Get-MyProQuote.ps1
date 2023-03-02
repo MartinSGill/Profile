@@ -1,31 +1,37 @@
 
 
 function script:Get-MyProQuote {
-    [CmdletBinding()][Alias("gq")]
+    [CmdletBinding()][Alias('gq')]
     param(
-        [Parameter(ParameterSetName="File",Mandatory=$true)]
+        [Parameter(ParameterSetName = 'File', Mandatory = $true)]
         [string]$Path,
 
-        [Parameter(ParameterSetName="Known",Mandatory=$true)]
-        [ValidateSet("ChuckNorris", "Quotes")]
+        [Parameter(ParameterSetName = 'Known', Mandatory = $true)]
+        [ValidateSet('ChuckNorris', 'Quotes')]
         [string]$Source,
 
-        [int]$Count=1,
+        [int]$Count = 1,
 
         [switch]$Pretty
     )
 
-    if ($PSCmdlet.ParameterSetName -eq "Path") {
-        if(!(Test-Path $Path) ) {
+    if ($PSCmdlet.ParameterSetName -eq 'Path') {
+        if (!(Test-Path $Path) ) {
             throw "File not found: '$Path'"
         }
     }
 
-    if ($PSCmdLet.ParameterSetName -eq "Known") {
+    if ($PSCmdLet.ParameterSetName -eq 'Known') {
         switch ($Source) {
-            'Quotes'        { $Path = (Resolve-Path "$PSScriptRoot/../Quotes/attributed-quotes.txt") }
-            'ChuckNorris'   { $Path = (Resolve-Path "$PSScriptRoot/../Quotes/chuck-norris.txt") }
-            Default         { throw "Unknown Source '$Source'" }
+            'Quotes' {
+                $Path = (Resolve-Path "$PSScriptRoot/../Quotes/attributed-quotes.txt")
+            }
+            'ChuckNorris' {
+                $Path = (Resolve-Path "$PSScriptRoot/../Quotes/chuck-norris.txt")
+            }
+            Default {
+                throw "Unknown Source '$Source'"
+            }
         }
     }
 
