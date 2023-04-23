@@ -1,4 +1,4 @@
-# My Profile
+# Martin's Profile
 
 ## Introduction
 
@@ -8,37 +8,56 @@ your own profile.
 
 ## Recent Changes
 
-* Migration of
+### Version 1.0
 
-## Dependencies
-
-Mandatory:
-
-```powershell
-winget install JanDeDobbeleer.OhMyPosh -s winget
-# OR scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json
-Install-Module Terminal-Icons
-Install-Module posh-git
-Install-Module PSReadline -AllowPrerelease -Force
-```
+* Renamed to `MartinsProfile`
+* Default Prefix changed to `Pro` for profile
+* Complete re-structure of module
+* Improvements to load performance
+* Dependencies & Imports now handled by Manifest
+* Removed a number of useless/obsolete functions
+* Added build script
 
 ## Install
 
-To install (__after installing dependencies__):
+### Install Dependencies
 
 ```powershell
-# Clone this repo
-git clone ...
-# Step into this repo
-Set-Location ./Profile
-# Ensure powershell profile folder exists
-New-Item -ItemType Directory -Force (Split-Path $PROFILE.CurrentUserCurrentHost -Parent)
-# Add import statement to profile
-Add-Content -Path $PROFILE.CurrentUserAllHosts -Value "Import-Module '$PWD/MyProfile.psm1'"
+winget install --id JanDeDobbeleer.OhMyPosh
+winget install --id voidtools.Everything
+Install-PSResource -Name Terminal-Icons -Version 0.10.0
+Install-PSResource -Name posh-git -Version 1.1.0
+Install-PSResource -Name PSReadline -Version 2.2.0
 ```
 
-Humanizer is no longer loaded by default, mostly because it can cause issues in
-some environments. Load it with `PS> Import-MyProHumanizer`
+### Build the Module
+
+_NOTE:_ I'll eventually create release artifacts, for now manual build is required
+
+Clone the repo and build the module
+
+```powershell
+git clone https://github.com/MartinSGill/Profile.git
+cd Profile
+/.build.ps1
+```
+
+### Import the Module
+
+```powershell
+Import-Module <path-to-repo>/Profile/artifacts/MartinsProfile
+```
+
+### Update your Profile
+
+If you want the module to load automatically every time, then update your
+profile with the line above.
+
+You can find your profile path with
+
+```powershell
+$PROFILE.CurrentUserAllHosts
+```
 
 ## Troubleshooting
 

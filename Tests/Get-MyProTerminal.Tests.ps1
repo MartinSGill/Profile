@@ -1,13 +1,13 @@
 #Requires -Modules @{ ModuleName="Pester"; ModuleVersion="5.4.0" }
 
-Describe 'Get-MyProTerminal' {
+Describe 'Get-Terminal' {
     BeforeAll {
-        . "$PSScriptRoot\..\Public\Get-MyProTerminal.ps1"
+        . "$PSScriptRoot\..\Public\Get-Terminal.ps1"
     }
 
     Context 'when -ListKnown switch is used' {
         It 'returns an array of known terminal names' {
-            $result = Get-MyProTerminal -ListKnown
+            $result = Get-Terminal -ListKnown
             $result | Should -Not -Contain 'Unknown'
         }
     }

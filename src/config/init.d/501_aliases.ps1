@@ -1,0 +1,5 @@
+
+VerboseBlock "Aliases" {
+    InstallEverythingCli
+    UpdateToolPath
+}
