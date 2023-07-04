@@ -56,4 +56,11 @@ if ($ProfileDebugMode) {
     }
 }
 
+$formats = Get-ChildItem -Path $PSScriptRoot/Formats -Filter '*.ps1xml'
+Update-FormatData -PrependPath $formats
+
+$types = Get-ChildItem -Path $PSScriptRoot/Types -Filter '*.ps1xml'
+Update-TypeData -PrependPath $types
+
+
 Write-Information "⏲️  $($PSStyle.Foreground.BrightYellow)MartinsProfile$($PSStyle.Foreground.BrightBlue) processed in $($PSStyle.Foreground.BrightYellow)$($moduleSw.ElapsedMilliseconds)$($PSStyle.Foreground.BrightBlue) ms.$($PSStyle.Reset)" -InformationAction 'Continue'

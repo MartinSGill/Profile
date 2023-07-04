@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Types>
+  <Type>
+    <Name>System.Int16</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>Bits</Name>
+        <GetScriptBlock>[OutputType([Humanizer.Bytes.ByteSize])]
+param()
+[Humanizer.ByteSizeExtensions]::Bits($this)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Bytes</Name>
+        <GetScriptBlock>[OutputType([Humanizer.Bytes.ByteSize])]
+param()
+[Humanizer.ByteSizeExtensions]::Bytes($this)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Kilobytes</Name>
+        <GetScriptBlock>[OutputType([Humanizer.Bytes.ByteSize])]
+param()
+[Humanizer.ByteSizeExtensions]::Kilobytes($this)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Megabytes</Name>
+        <GetScriptBlock>[OutputType([Humanizer.Bytes.ByteSize])]
+param()
+[Humanizer.ByteSizeExtensions]::Megabytes($this)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Gigabytes</Name>
+        <GetScriptBlock>[OutputType([Humanizer.Bytes.ByteSize])]
+param()
+[Humanizer.ByteSizeExtensions]::Gigabytes($this)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Terabytes</Name>
+        <GetScriptBlock>[OutputType([Humanizer.Bytes.ByteSize])]
+param()
+[Humanizer.ByteSizeExtensions]::Terabytes($this)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Milliseconds</Name>
+        <GetScriptBlock>[OutputType([System.TimeSpan])]
+param()
+[Humanizer.NumberToTimeSpanExtensions]::Milliseconds($this)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Seconds</Name>
+        <GetScriptBlock>[OutputType([System.TimeSpan])]
+param()
+[Humanizer.NumberToTimeSpanExtensions]::Seconds($this)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Minutes</Name>
+        <GetScriptBlock>[OutputType([System.TimeSpan])]
+param()
+[Humanizer.NumberToTimeSpanExtensions]::Minutes($this)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Hours</Name>
+        <GetScriptBlock>[OutputType([System.TimeSpan])]
+param()
+[Humanizer.NumberToTimeSpanExtensions]::Hours($this)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Days</Name>
+        <GetScriptBlock>[OutputType([System.TimeSpan])]
+param()
+[Humanizer.NumberToTimeSpanExtensions]::Days($this)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Weeks</Name>
+        <GetScriptBlock>[OutputType([System.TimeSpan])]
+param()
+[Humanizer.NumberToTimeSpanExtensions]::Weeks($this)
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+</Types>
