@@ -6,45 +6,57 @@ function UpdateToolPath {
     #>
     param()
 
+    VerboseBlock "docker" {
     $p = @{
         SearchPath = @()
         ToolName = 'docker.exe'
         AliasName = 'd'
     }
     NewToolAlias @p
+}
 
-    $p = @{
-        SearchPath = @()
-        ToolName = 'docker-compose.exe'
-        AliasName = 'dc'
+    VerboseBlock "docker-compose" {
+        $p = @{
+            SearchPath = @()
+            ToolName = 'docker-compose.exe'
+            AliasName = 'dc'
+        }
+        NewToolAlias @p
     }
-    NewToolAlias @p
 
-    $p = @{
-        SearchPath = @("$env:ProgramFiles\Sublime Merge")
-        ToolName = 'smerge.exe'
-        AliasName = 'sm'
+    VerboseBlock "Sublime Merge" {
+        $p = @{
+            SearchPath = @("$env:ProgramFiles\Sublime Merge")
+            ToolName = 'smerge.exe'
+            AliasName = 'sm'
+        }
+        NewToolAlias @p
     }
-    NewToolAlias @p
 
-    $p = @{
-        SearchPath = @("$env:ProgramFiles\Notepad++")
-        ToolName = 'notepad++.exe'
-        AliasName = 'npp'
+    VerboseBlock "Notepad++" {
+        $p = @{
+            SearchPath = @("$env:ProgramFiles\Notepad++")
+            ToolName = 'notepad++.exe'
+            AliasName = 'npp'
+        }
+        NewToolAlias @p
     }
-    NewToolAlias @p
 
-    $p = @{
-        SearchPath = @()
-        ToolName = 'Far.exe'
-        AliasName = 'far'
+    VerboseBlock "FAR filemanager" {
+        $p = @{
+            SearchPath = @()
+            ToolName = 'Far.exe'
+            AliasName = 'far'
+        }
+        NewToolAlias @p
     }
-    NewToolAlias @p
 
-    $p = @{
-        SearchPath = @()
-        ToolName = 'RegexBuddy4.exe'
-        AliasName = 'regbuddy'
+    VerboseBlock "RegexBuddy" {
+        $p = @{
+            SearchPath = @()
+            ToolName = 'RegexBuddy4.exe'
+            AliasName = 'regbuddy'
+        }
+        NewToolAlias @p
     }
-    NewToolAlias @p
 }

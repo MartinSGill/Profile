@@ -1,19 +1,15 @@
 ## Colors / Formatting
 VerboseBlock "Theme" {
-    $PSStyle.Formatting.Debug = $PSStyle.Foreground.BrightBlue
-    $PSStyle.Formatting.Verbose = $PSStyle.Foreground.BrightBlack
-    $PSStyle.Formatting.Warning = $PSStyle.Foreground.BrightYellow
+    $PSStyle.Formatting.Debug = $PSStyle.Blue
+    $PSStyle.Formatting.Verbose = $PSStyle.Foreground.Cyan
+    $PSStyle.Formatting.Warning = $PSStyle.Foreground.Yellow
     $PSStyle.Formatting.Error = $PSStyle.Foreground.BrightRed
 
     # UI Progress Indicator for WindowsTerminal & ConEmu
     $PSStyle.Progress.UseOSCIndicator = $true
 
     if ($ProfileDebugMode) {
-        Write-Debug "Example Debug Message" -Debug
-        Write-Verbose "Example Verbose Message" -Verbose
-        Write-Warning "Example Warning Message" -WarningAction 'Continue'
-        Write-Information "Example Information Message" -InformationAction 'Continue'
-        Write-Host "Example Host Message"
+        Write-Host "$($PSStyle.Formatting.Debug)Debug $($PSStyle.Formatting.Verbose)Verbose $($PSStyle.Formatting.Warning)Warning $($PSStyle.Formatting.Error)Error $($PSStyle.Reset)"
     }
 
     VerboseBlock "Posh-Git" {
