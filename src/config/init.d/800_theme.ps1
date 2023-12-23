@@ -17,6 +17,6 @@ VerboseBlock "Theme" {
     }
 
     VerboseBlock "Oh-My-Posh" {
-        oh-my-posh init pwsh --config "$PSScriptRoot/../themes/mytheme.omp.json" | Invoke-Expression
+        oh-my-posh init pwsh --config "$PSScriptRoot/../themes/my-tokyo.omp.json" | Invoke-Expression
     }
 }

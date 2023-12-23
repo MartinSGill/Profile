@@ -1,4 +1,4 @@
-#Requires -Module @{ ModuleName = "Configuration"; ModuleVersion="1.5.1" }
+#Requires -Module @{ ModuleName = "Configuration"; ModuleVersion="1.6.0" }
 
 [CmdletBinding()]
 param()
@@ -43,7 +43,7 @@ $null = $sb.AppendLine($content)
 # Generate Artifacts
 if ((Test-Path -Path $artifactFolder)) {
     Write-Verbose "Removing artifacts folder: $artifactFolder"
-    Remove-Item -Path $artifactFolder -Force -Recurse
+    Remove-Item -Path $artifactFolder -Force -Recurse -ErrorAction Continue
 }
 
 Write-Verbose "Creating Artifacts folder: $artifactFolder"
@@ -85,7 +85,7 @@ $manifest = @{
     CompanyName =  'Lupus Familiaris Software'
     Copyright =  '(c) 2023, Martin Gill. All Rights Reserved.'
     RootModule =  "$moduleName.psm1"
-    ModuleVersion =  '1.0.0'
+    ModuleVersion =  '1.1.0'
     Description =  ''
     # ProcessorArchitecture = 'MSIL'
     PowerShellVersion =  '7.0'
@@ -96,11 +96,11 @@ $manifest = @{
     RequiredModules =  @(
         @{
             ModuleName = 'PSReadline'
-            ModuleVersion = '2.2.0'
+            ModuleVersion = '2.3.4'
         }
         @{
             ModuleName = 'Terminal-Icons'
-            ModuleVersion = '0.10.0'
+            ModuleVersion = '0.11.0'
         }
         @{
             ModuleName = 'posh-git'
