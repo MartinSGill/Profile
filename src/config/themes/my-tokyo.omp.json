@@ -84,6 +84,26 @@
           "type": "aws"
         },
         {
+          /* $env:POSH_AZURE_ENABLED = $true */
+          "type": "az",
+          "style": "plain",
+          "foreground":"#ffa5d8",
+          "template": "[<#0072c6>\uebd8</>{{.Name}}]",
+          "properties": {
+            "source": "pwsh"
+          }
+        },
+        {
+          /* $env:POSH_AZURE_ENABLED = $true */
+          "type": "az",
+          "style": "plain",
+          "foreground":"#ffa5d8",
+          "template": "[<#0072c6>\uebd8</>{{.Name}}]",
+          "properties": {
+            "source": "cli"
+          }
+        },
+        {
           "foreground": "#ffa5d8",
           "style": "plain",
           "template": "[{{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}]",
