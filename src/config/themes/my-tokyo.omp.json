@@ -5,9 +5,32 @@
       "alignment": "left",
       "segments": [
         {
+          "type": "os",
+          "style": "plain",
+          "foreground": "#b3f395",
+          "template": "<#7eb8da>\u250f</> {{.Icon}}{{ if .WSL }} WSL{{ end }} ",
+          "properties": {
+            "macos": "mac"
+          }
+        },
+        {
+          "type": "shell",
+          "style": "plain",
+          "foreground": "#ffd88a",
+          "template": "{{.Name}} ",
+          "properties": {
+            "mapped_shell_names": {
+              "pwsh": "\udb82\ude0a",
+              "bash": "\uebca",
+              "cmd": "\uebc4"
+
+            }
+          }
+        },
+        {
           "foreground": "#7eb8da",
           "style": "plain",
-          "template": "\u250f[<#ffffff>\ueb99</> {{ .UserName }} from <#ffffff>\uf108</> {{ .HostName }}]",
+          "template": "[<#ffffff>\ueb99</> {{ .UserName }} from <#ffffff>\uf108</> {{ .HostName }}]",
           "type": "session"
         },
         {
