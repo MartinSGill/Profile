@@ -16,10 +16,13 @@ function Get-DropboxFolder {
             (Join-Path "$env:APPDATA" 'dropbox\info.json')
             (Join-Path "$env:LOCALAPPDATA" 'dropbox\info.json')
         )
+    } else {
+        WriteDebug "Dropbox not supported on $env:OS"
+        return $null
     }
 
     if ($testPaths.Count -le 0) {
-        Write-Warning 'Dropbox does not appear to be installed.'
+        WriteDebug 'Dropbox not installed'
         return $null
     }
 
