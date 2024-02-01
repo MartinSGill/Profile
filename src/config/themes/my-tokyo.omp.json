@@ -101,7 +101,7 @@
           "type": "az",
           "style": "plain",
           "foreground":"#ffa5d8",
-          "template": "[<#0072c6>\uebd8</>{{.Name}}]",
+          "template": "[<#0072c6>\uebd8 \udb82\ude0a</> {{printf \"%.6s\" .Name}}]",
           "properties": {
             "source": "pwsh"
           }
@@ -111,7 +111,7 @@
           "type": "az",
           "style": "plain",
           "foreground":"#ffa5d8",
-          "template": "[<#0072c6>\uebd8</>{{.Name}}]",
+          "template": "[<#0072c6>\uebd8</> {{printf \"%.6s\" .Name}}]",
           "properties": {
             "source": "cli"
           }
