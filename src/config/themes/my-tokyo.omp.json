@@ -65,6 +65,19 @@
           "style": "diamond",
           "template": "[<#ffffff>\uf073</> {{ .CurrentDate | date .Format }}]",
           "type": "time"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "#E06C75",
+          "template": "<#7eb8da>\u2503</>"
         },
         {
           "foreground": "#ffa5d8",
