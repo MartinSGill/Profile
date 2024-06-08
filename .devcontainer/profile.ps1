@@ -2,7 +2,7 @@
 $env:MyProfileDebugMode = $true
 
 Write-Output "Building..."
-& $PWD/build.ps1
+Invoke-Build
 
 Write-Output "Loading Module..."
 Write-Output "$($PSStyle.Foreground.White)MyProfile Debug Mode: $env:MartinsProfileDebugMode$($PSStyle.Reset)"
