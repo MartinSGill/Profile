@@ -7,7 +7,7 @@ param()
 $CompanyName = (property CompanyName 'Lupus Familiaris Software')
 $Copyright =  (property Copyright '(c) 2024, Martin Gill. All Rights Reserved.')
 $ModuleName = (property ModuleName 'MartinsProfile')
-$ModuleVersion = (property ModuleVersion '1.1.0')
+$ModuleVersion = (property ModuleVersion '1.2.0')
 
 # Paths
 $SrcFolder = (property SrcFolder (Join-Path $BuildRoot 'src'))
@@ -15,19 +15,20 @@ $ClassesFolder = (property ClassFolder (Join-Path $srcFolder 'Classes'))
 $PublicFolder = (property PublicFolder (Join-Path $srcFolder 'Public'))
 $PrivateFolder = (property PrivateFolder (Join-Path $srcFolder 'Private'))
 
-$OutputFolder = (property ArtifactFolder (Join-Path $BuildRoot 'artifacts'))
-$ArtifactFolder = (property ArtifactFolder (Join-Path $OutputFolder $ModuleName))
+$OutputFolder = (property ModuleOutputFolder (Join-Path $BuildRoot 'artifacts'))
+$ModuleOutputFolder = (property ModuleOutputFolder (Join-Path $OutputFolder $ModuleName))
+$DevRepoPath = (property DevRepoPath (Join-Path $OutputFolder 'devrepo'))
 
 task Build GenerateModule, CopyAdditionalFiles, GenerateManifest, {
 
 }
 
 task Clean {
-    remove $ArtifactFolder
+    remove $ModuleOutputFolder
 }
 
 task EnsureFolders {
-    $null = New-Item -Path $ArtifactFolder -ItemType Directory -Force
+    $null = New-Item -Path $ModuleOutputFolder -ItemType Directory -Force
 }
 
 $ClassScripts = Get-ChildItem -Path $ClassesFolder -Recurse -Filter '*.ps1'
@@ -64,7 +65,7 @@ task GenerateModule EnsureFolders, {
     $null = $sb.AppendLine($content)
 
     Write-Verbose 'Writing root module file'
-    Set-Content -Path (Join-Path $artifactFolder "$moduleName.psm1") -Value $sb.ToString()
+    Set-Content -Path (Join-Path $ModuleOutputFolder "$moduleName.psm1") -Value $sb.ToString()
 }
 
 task CopyAdditionalFiles {
@@ -90,20 +91,20 @@ task CopyAdditionalFiles {
     Write-Verbose 'Copying Additional Files'
     $additionalFiles | ForEach-Object {
         Write-Verbose "Copying $($_.Name)"
-        Copy-Item -Path "$SrcFolder/$($_.Path)" -Destination "$ArtifactFolder/$($_.Path)" -Recurse -Force
+        Copy-Item -Path "$SrcFolder/$($_.Path)" -Destination "$ModuleOutputFolder/$($_.Path)" -Recurse -Force
     }
 }
 
 task GenerateManifest EnsureFolders, {
     $manifest = @{
-        Path = "$ArtifactFolder/$ModuleName.psd1"
+        Path = "$ModuleOutputFolder/$ModuleName.psd1"
         NestedModules = @()
         Guid = '585b8e60-7427-478c-ad52-43302e91c970'
         CompanyName = $CompanyName
         Copyright = $Copyright
         RootModule = "$ModuleName.psm1"
         ModuleVersion = $ModuleVersion
-        Description =  ''
+        Description =  "Martin's Personal Profile"
         # ProcessorArchitecture = 'MSIL'
         PowerShellVersion =  '7.0'
         # ClrVersion =  ''
@@ -144,13 +145,33 @@ task GenerateManifest EnsureFolders, {
         ReleaseNotes = 'TODO: Release Notes'
         # Prerelease = ''
         RequireLicenseAcceptance = $false
-        # ExternalModuleDependencies = @()
         # HelpInfoUri = ''
         PassThru = $false
         DefaultCommandPrefix = "Pro"
         WhatIf = $false
     }
     New-ModuleManifest @manifest
+}
+
+task CreateDevRepository -If { @(Get-PSResourceRepository | Where-Object Name -eq 'MartinsProfileDev').Count -eq 0 } {
+    $null = New-Item $DevRepoPath -Force -ItemType Directory
+    Register-PSResourceRepository -Name MartinsProfileDev -Uri $DevRepoPath -Trusted
+}
+
+task PublishLocal Build, CreateDevRepository, {
+    Publish-PSResource -Path $ModuleOutputFolder -Repository MartinsProfileDev -SkipDependenciesCheck
+}
+
+task DevInstall RemoveLocal, Build, ImportLocal, {
+
+}
+
+task RemoveLocal {
+    Remove-Module MartinsProfile
+}
+
+task ImportLocal {
+    Import-Module $ModuleOutputFolder/MartinsProfile
 }
 
 task Rebuild Clean,Build

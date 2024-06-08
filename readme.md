@@ -8,6 +8,13 @@ your own profile.
 
 ## Recent Changes
 
+### Version 1.2
+
+* Windows Terminal fragments added 'Add-TerminalConfig'
+* Converted Build to InvokeBuild
+* Fixed & Improved DevContainer
+* Added support for publishing to PSGallery
+
 ### Version 1.0
 
 * Renamed to `MartinsProfile`
@@ -30,22 +37,16 @@ Install-PSResource -Name posh-git -Version 1.1.0
 Install-PSResource -Name PSReadline -Version 2.2.0
 ```
 
-### Build the Module
-
-_NOTE:_ I'll eventually create release artifacts, for now manual build is required
-
-Clone the repo and build the module
+### Install the Module
 
 ```powershell
-git clone https://github.com/MartinSGill/Profile.git
-cd Profile
-/.build.ps1
+Install-PSResource MartinsProfile
 ```
 
 ### Import the Module
 
 ```powershell
-Import-Module <path-to-repo>/Profile/artifacts/MartinsProfile
+Import-Module MartinsProfile
 ```
 
 ### Update your Profile
@@ -66,3 +67,28 @@ debug output.
 
 Alternatively you can set `$env:MyProfileDebugMode` before attempting to import
 the profile to enable debug output.
+
+## Development
+
+Ensure dependencies have been installed.
+
+### Build the Module
+
+```powershell
+git clone https://github.com/MartinSGill/Profile.git
+cd Profile
+```
+
+**Option 1:** Open in VsCode and then open in DevContainer
+
+```powershell
+code .
+```
+
+**Option 2:** Without DevContainer
+
+```powershell
+Install-PSResource InvokeBuild
+Import-Module InvokeBuild
+Invoke-Build DevInstall
+```
