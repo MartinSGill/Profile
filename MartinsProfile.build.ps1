@@ -7,7 +7,7 @@ param()
 $CompanyName = (property CompanyName 'Lupus Familiaris Software')
 $Copyright =  (property Copyright '(c) 2024, Martin Gill. All Rights Reserved.')
 $ModuleName = (property ModuleName 'MartinsProfile')
-$ModuleVersion = (property ModuleVersion '1.2.0')
+$ModuleVersion = (property ModuleVersion '1.3.0')
 
 # Paths
 $SrcFolder = (property SrcFolder (Join-Path $BuildRoot 'src'))
@@ -167,7 +167,7 @@ task DevInstall RemoveLocal, Build, ImportLocal, {
 }
 
 task RemoveLocal {
-    Remove-Module MartinsProfile
+    $null = Remove-Module MartinsProfile -ErrorAction SilentlyContinue
 }
 
 task ImportLocal {

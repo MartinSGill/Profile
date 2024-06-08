@@ -8,6 +8,10 @@ your own profile.
 
 ## Recent Changes
 
+### Version 1.3
+
+* Add Switch-DarkMode to toggle Windows Dark/Light theme
+
 ### Version 1.2
 
 * Windows Terminal fragments added 'Add-TerminalConfig'
